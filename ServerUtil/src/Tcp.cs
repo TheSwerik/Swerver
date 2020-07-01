@@ -6,7 +6,7 @@ namespace ServerTest
     public class Tcp
     {
         private const int BufferSize = 4096;
-        private int _id;
+        private readonly int _id;
         private byte[] _receiveBuffer;
         private NetworkStream _stream;
         public TcpClient Socket;
@@ -39,6 +39,19 @@ namespace ServerTest
             _stream = Socket.GetStream();
 
             _stream.BeginRead(_receiveBuffer, 0, BufferSize, ReceiveCallback, null);
+        }
+
+        public void SendData(Packet packet)
+        {
+            try
+            {
+                if (Socket == null) return;
+                _stream.BeginWrite(packet.ToArray(), 0, packet.Length(), null, null);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Error sending data to Player {_id} via TCP: {e}");
+            }
         }
 
         /// <summary>
