@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client", "Client\Client.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerUtil", "ServerUtil\ServerUtil.csproj", "{10D69B59-B9DF-44D8-8843-24C7129AB78D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Swerver", "Swerver\Swerver.csproj", "{841C030E-736F-4779-8820-576444703BB5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{10D69B59-B9DF-44D8-8843-24C7129AB78D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{10D69B59-B9DF-44D8-8843-24C7129AB78D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{10D69B59-B9DF-44D8-8843-24C7129AB78D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{841C030E-736F-4779-8820-576444703BB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{841C030E-736F-4779-8820-576444703BB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{841C030E-736F-4779-8820-576444703BB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{841C030E-736F-4779-8820-576444703BB5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
