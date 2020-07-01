@@ -11,11 +11,17 @@ namespace ServerTest
         public string ip = "127.0.0.1";
         private Tcp tcp;
 
-        public void Init()
+        public static void Init()
         {
-            if (Instance == null) Instance = this;
+            if (Instance == null)
+            {
+                Instance = new Client();
+                Instance.Start();
+            }
             else
+            {
                 Debug.WriteLine("Instance already exists, destroying Object!");
+            }
         }
 
         private void Start() { tcp = new Tcp(); }
