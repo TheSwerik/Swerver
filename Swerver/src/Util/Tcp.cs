@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net.Sockets;
 
-namespace ServerTest
+namespace ServerLibrary.Util
 {
     public abstract class Tcp
     {

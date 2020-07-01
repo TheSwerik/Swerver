@@ -1,4 +1,4 @@
-﻿namespace ServerTest
+﻿namespace ServerLibrary.Util
 {
     /// <summary>This houses all needed Constants.</summary>
     public static class Constants
