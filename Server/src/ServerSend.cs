@@ -12,7 +12,7 @@ namespace ServerTest
         private static void SendTcpData(int client, Packet packet)
         {
             packet.WriteLength();
-            Server.Clients[client].tcp.SendData(packet);
+            Server.Clients[client].Tcp.SendData(packet);
         }
 
         /// <summary>
@@ -22,7 +22,7 @@ namespace ServerTest
         private static void SendTcpData(Packet packet)
         {
             packet.WriteLength();
-            foreach (var client in Server.Clients.Values) client.tcp.SendData(packet);
+            foreach (var client in Server.Clients.Values) client.Tcp.SendData(packet);
         }
 
         /// <summary>
@@ -35,7 +35,7 @@ namespace ServerTest
             packet.WriteLength();
             foreach (var client in Server.Clients
                                          .Where(c => c.Key != except)
-                                         .Select(a => a.Value)) client.tcp.SendData(packet);
+                                         .Select(a => a.Value)) client.Tcp.SendData(packet);
         }
 
         public static void Welcome(int client, string msg)

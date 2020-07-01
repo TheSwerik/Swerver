@@ -10,7 +10,7 @@ namespace ServerTest
             var username = packet.ReadString();
 
             Console.WriteLine(
-                $"{Server.Clients[client].tcp.Socket.Client.RemoteEndPoint} connected successfully and is now player {client}.");
+                $"{Server.Clients[client].Tcp.Socket.Client.RemoteEndPoint} connected successfully and is now player {client}.");
             if (client != id)
                 Console.WriteLine($"Player \"{username}\" (ID: {client}) has assumed the wrong client ID ({id})!");
 
