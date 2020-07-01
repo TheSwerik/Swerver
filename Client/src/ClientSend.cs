@@ -15,7 +15,7 @@
         private static void SendUdpData(Packet packet)
         {
             packet.WriteLength();
-            Client.Instance.Udp.SendData(packet);
+            Client.Instance.udp.SendData(packet);
         }
 
         public static void WelcomeReceived()
@@ -25,6 +25,14 @@
             packet.Write(MainWindow.Username);
 
             SendTcpData(packet);
+        }
+
+        public static void UdpTestReceived()
+        {
+            using var packet = new Packet((int) ClientPackets.UdpTestReceived);
+            packet.Write("Received a UDP Packet.");
+
+            SendUdpData(packet);
         }
     }
 }

@@ -10,13 +10,15 @@ namespace ServerTest
     /// <summary>Sent from server to client.</summary>
     public enum ServerPackets
     {
-        Welcome = 1
+        Welcome = 1,
+        UdpTest = 2
     }
 
     /// <summary>Sent from client to server.</summary>
     public enum ClientPackets
     {
-        WelcomeReceived = 1
+        WelcomeReceived = 1,
+        UdpTestReceived = 2
     }
 
     /// <summary>Packets that get sent via the Network.</summary>

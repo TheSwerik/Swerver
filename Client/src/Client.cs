@@ -34,7 +34,7 @@ namespace ServerTest
         private void Start()
         {
             Tcp = new ClientTcp();
-            udp = new Udp(Ip, Port, ref Id);
+            udp = new Udp(Ip, Port);
         }
 
         public void ConnectToServer()
@@ -45,7 +45,11 @@ namespace ServerTest
 
         private static void InitializeClientData()
         {
-            packetHandlers = new Dictionary<int, PacketHandler> {{(int) ServerPackets.Welcome, ClientHandler.Welcome}};
+            packetHandlers = new Dictionary<int, PacketHandler>
+                             {
+                                 {(int) ServerPackets.Welcome, ClientHandler.Welcome},
+                                 {(int) ServerPackets.UdpTest, ClientHandler.UdpTest}
+                             };
             Console.WriteLine("Initialized packets.");
         }
 
@@ -66,15 +70,10 @@ namespace ServerTest
 
         public class Udp
         {
-            protected readonly int Id;
             public IPEndPoint EndPoint;
             public UdpClient Socket;
 
-            public Udp(string ip, int port, ref int id)
-            {
-                Id = id;
-                EndPoint = new IPEndPoint(IPAddress.Parse(ip), port);
-            }
+            public Udp(string ip, int port) { EndPoint = new IPEndPoint(IPAddress.Parse(ip), port); }
 
             public void Connect(int localPort)
             {
@@ -112,24 +111,12 @@ namespace ServerTest
             {
                 try
                 {
-                    packet.InsertInt(Id);
+                    packet.InsertInt(Instance.Id);
                     Socket?.BeginSend(packet.ToArray(), packet.Length(), null, null);
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine($"Error sending data to Player {Id} via Udp: {e}");
-                }
-            }
-
-            public void SendData(IPEndPoint clientEndpoint, Packet packet)
-            {
-                try
-                {
-                    Socket?.BeginSend(packet.ToArray(), packet.Length(), null, null);
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine($"Error sending data to Player {clientEndpoint} via Udp: {e}");
+                    Console.WriteLine($"Error sending data to Player {Instance.Id} via Udp: {e}");
                 }
             }
 

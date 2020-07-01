@@ -43,13 +43,12 @@ namespace ServerTest
                 ServerSend.UdpTest(_id);
             }
 
-            public void SendData(Packet packet) { Server.SendUDPData(EndPoint, packet); }
+            public void SendData(Packet packet) { Server.SendUdpData(EndPoint, packet); }
 
             public void HandleData(Packet packetData)
             {
                 var packetLength = packetData.ReadInt();
                 var packetBytes = packetData.ReadBytes(packetLength);
-
                 ThreadManager.ExecuteOnMainThread(() =>
                                                   {
                                                       using var packet = new Packet(packetBytes);

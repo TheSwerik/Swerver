@@ -14,7 +14,15 @@ namespace ServerTest
             Client.Instance.Id = id;
             ClientSend.WelcomeReceived();
 
-            Client.Instance.Udp.Connect(((IPEndPoint) Client.Instance.Tcp.Socket.Client.LocalEndPoint).Port);
+            Client.Instance.udp.Connect(((IPEndPoint) Client.Instance.Tcp.Socket.Client.LocalEndPoint).Port);
+        }
+
+        public static void UdpTest(Packet packet)
+        {
+            var msg = packet.ReadString();
+
+            Console.WriteLine($"Message Received: {msg}");
+            ClientSend.UdpTestReceived();
         }
     }
 }

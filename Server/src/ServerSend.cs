@@ -64,6 +64,8 @@ namespace ServerTest
                                          .Select(a => a.Value)) client.udp.SendData(packet);
         }
 
+        #region Packets
+
         /// <summary>Sends a welcome-packet to a Client.</summary>
         /// <param name="client">ID of the Client</param>
         /// <param name="msg">Message to be sent</param>
@@ -79,10 +81,12 @@ namespace ServerTest
         /// <param name="client">ID of the Client</param>
         public static void UdpTest(int client)
         {
-            using var packet = new Packet((int) ServerPackets.udpTest);
+            using var packet = new Packet((int) ServerPackets.UdpTest);
             packet.Write("A test packet for UDP.");
 
             SendUdpData(client, packet);
         }
+
+        #endregion
     }
 }

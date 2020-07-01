@@ -10,6 +10,7 @@ namespace ServerTest
         public delegate void PacketHandler(int client, Packet packet);
 
         private static TcpListener _tcpListener;
+        private static UdpClient _udpListener;
 
         public static Dictionary<int, PacketHandler> packetHandlers;
         public static int MaxPlayers { get; set; }
@@ -30,6 +31,9 @@ namespace ServerTest
             _tcpListener.Start();
             _tcpListener.BeginAcceptTcpClient(TcpCallback, null);
 
+            _udpListener = new UdpClient(Port);
+            _udpListener.BeginReceive(UdpReceiveCallback, null);
+
             Console.WriteLine($"Server Started on {Port}.");
         }
 
@@ -49,15 +53,59 @@ namespace ServerTest
             Console.WriteLine($"{client.Client.RemoteEndPoint} failed to connect: Server full!");
         }
 
+        private static void UdpReceiveCallback(IAsyncResult result)
+        {
+            try
+            {
+                var clientEndPoint = new IPEndPoint(IPAddress.Any, 0);
+                var data = _udpListener.EndReceive(result, ref clientEndPoint);
+                _udpListener.BeginReceive(UdpReceiveCallback, null);
+
+                if (data.Length < 4) return;
+
+                using var packet = new Packet(data);
+                var clientId = packet.ReadInt();
+
+                if (clientId == 0) return;
+
+                if (Clients[clientId].udp.EndPoint == null)
+                {
+                    Clients[clientId].udp.Connect(clientEndPoint);
+                    return;
+                }
+
+                if (Clients[clientId].udp.EndPoint.ToString() == clientEndPoint.ToString())
+                    Clients[clientId].udp.HandleData(packet);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Error receiving UDP data: {e}");
+            }
+        }
+
+        public static void SendUdpData(IPEndPoint clientEndPoint, Packet packet)
+        {
+            try
+            {
+                if (clientEndPoint != null)
+                    _udpListener.BeginSend(packet.ToArray(), packet.Length(), clientEndPoint, null, null);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Error sending data to {clientEndPoint} via UDP: {e}");
+            }
+        }
+
         private static void InitializeServerData()
         {
             for (var i = 1; i <= MaxPlayers; i++) Clients.Add(i, new Client(i));
 
             packetHandlers = new Dictionary<int, PacketHandler>
-                             {{(int) ClientPackets.WelcomeReceived, ServerHandler.WelcomeReceived}};
+                             {
+                                 {(int) ClientPackets.WelcomeReceived, ServerHandler.WelcomeReceived},
+                                 {(int) ClientPackets.UdpTestReceived, ServerHandler.UdpTestReceived}
+                             };
             Console.WriteLine("Initialized packets.");
         }
-
-        public static void SendUDPData(IPEndPoint endPoint, Packet packet) { throw new NotImplementedException(); }
     }
 }

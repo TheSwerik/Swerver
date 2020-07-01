@@ -16,5 +16,12 @@ namespace ServerTest
 
             // TODO: send player into game
         }
+
+        public static void UdpTestReceived(int client, Packet packet)
+        {
+            var msg = packet.ReadString();
+
+            Console.WriteLine($"Received a Message via UDP. Message: {msg}.");
+        }
     }
 }
