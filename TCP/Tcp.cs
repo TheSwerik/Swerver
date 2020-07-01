@@ -13,9 +13,11 @@ namespace ServerTest
         public Tcp(int id) { _id = id; }
         public Tcp() { }
 
-        /*
-         * For Client
-         */
+        /// <summary>
+        ///     This is the Connect Method the Client should use!
+        /// </summary>
+        /// <param name="ip">Server IP</param>
+        /// <param name="port">Server Port</param>
         public void Connect(string ip, int port)
         {
             Socket = new TcpClient
@@ -28,9 +30,6 @@ namespace ServerTest
             Socket.BeginConnect(ip, port, ConnectCallback, Socket);
         }
 
-        /*
-         * For Client
-         */
         private void ConnectCallback(IAsyncResult result)
         {
             Socket.EndConnect(result);
@@ -42,9 +41,10 @@ namespace ServerTest
             _stream.BeginRead(_receiveBuffer, 0, BufferSize, ReceiveCallback, null);
         }
 
-        /*
-         * For Server
-         */
+        /// <summary>
+        ///     This is the Connect Method the Server should use!
+        /// </summary>
+        /// <param name="socket"></param>
         public void Connect(TcpClient socket)
         {
             Socket = socket;
@@ -56,9 +56,6 @@ namespace ServerTest
             _stream.BeginRead(_receiveBuffer, 0, BufferSize, ReceiveCallback, null);
         }
 
-        /*
-         * For Server
-         */
         private void ReceiveCallback(IAsyncResult result)
         {
             try
