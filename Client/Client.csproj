@@ -15,7 +15,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\TCP\TCP.csproj"/>
+        <ProjectReference Include="..\ServerUtil\ServerUtil.csproj"/>
     </ItemGroup>
 
 </Project>

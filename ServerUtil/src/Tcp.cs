@@ -70,7 +70,7 @@ namespace ServerTest
             }
             catch (Exception e)
             {
-                Console.WriteLine($"Error receiving TCP Data: {e}");
+                Console.WriteLine($"Error receiving ServerUtil Data: {e}");
                 //TODO Disconnect
             }
         }
