@@ -3,15 +3,22 @@ using System.Threading;
 
 namespace ServerTest
 {
-    internal static class Program
+    public static class ServerStarter
     {
-        private const int Port = 46551;
-        private static bool _isRunning;
+        /// <summary>The Port the Server will run on.</summary>
+        public static int Port = 46551;
 
-        internal static void Main(string[] args)
+        private static bool _isRunning;
+        private static GameLogic _gameLogic;
+
+        /// <summary>Starts the Server.</summary>
+        /// <param name="gameLogic">The Instance of your GameLogic Implementation.</param>
+        public static void Start(GameLogic gameLogic)
         {
             Console.Title = "Server";
             _isRunning = true;
+
+            _gameLogic = new GameLogic();
 
             var mainThread = new Thread(MainThread);
             mainThread.Start();
@@ -26,7 +33,7 @@ namespace ServerTest
             while (_isRunning)
             while (nextLoop < DateTime.Now)
             {
-                GameLogic.Update();
+                _gameLogic.Update();
 
                 nextLoop = nextLoop.AddMilliseconds(Constants.MsPerTick);
 

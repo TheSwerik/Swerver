@@ -2,9 +2,7 @@
 {
     public static class ClientSend
     {
-        /// <summary>
-        ///     Send TCP Data to a Client.
-        /// </summary>
+        /// <summary>Send TCP Data to a Client.</summary>
         /// <param name="packet">Data to be sent</param>
         private static void SendTcpData(Packet packet)
         {

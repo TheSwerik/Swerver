@@ -1,7 +1,7 @@
 ﻿namespace ServerTest
 {
-    public static class GameLogic
+    public class GameLogic
     {
-        public static void Update() { ThreadManager.UpdateMain(); }
+        public void Update() { ThreadManager.UpdateMain(); }
     }
 }
