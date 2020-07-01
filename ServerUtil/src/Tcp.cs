@@ -12,12 +12,10 @@ namespace ServerTest
         private NetworkStream _stream;
         public TcpClient Socket;
 
-        public Tcp(int id) { Id = id; }
-        public Tcp() { }
+        protected Tcp(int id) { Id = id; }
+        protected Tcp() { }
 
-        /// <summary>
-        ///     This should only be used by the Client!
-        /// </summary>
+        /// <summary>This should only be used by the Client!</summary>
         /// <param name="ip">Server IP</param>
         /// <param name="port">Server Port</param>
         public void Connect(string ip, int port)
@@ -34,9 +32,7 @@ namespace ServerTest
             Socket.BeginConnect(ip, port, ConnectCallback, Socket);
         }
 
-        /// <summary>
-        ///     This should only be used by the Server!
-        /// </summary>
+        /// <summary>This should only be used by the Server!</summary>
         /// <param name="socket"></param>
         /// <param name="sendWelcome">The Send Method</param>
         public void Connect(TcpClient socket, Action<int, string> sendWelcome)
@@ -66,6 +62,8 @@ namespace ServerTest
             _stream.BeginRead(_receiveBuffer, 0, BufferSize, ReceiveCallback, null);
         }
 
+        /// <summary></summary>
+        /// <param name="packet"></param>
         public void SendData(Packet packet)
         {
             try

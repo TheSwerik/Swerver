@@ -19,7 +19,8 @@ namespace ServerTest
         WelcomeReceived = 1
     }
 
-    public class Packet : IDisposable
+    /// <summary>Packets that get sent via the Network.</summary>
+    public sealed class Packet : IDisposable
     {
         private List<byte> _buffer;
 
@@ -60,7 +61,7 @@ namespace ServerTest
             GC.SuppressFinalize(this);
         }
 
-        protected virtual void Dispose(bool disposing)
+        private void Dispose(bool disposing)
         {
             if (_disposed) return;
             if (disposing)

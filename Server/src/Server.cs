@@ -12,7 +12,7 @@ namespace ServerTest
         private static TcpListener _tcpListener;
 
         public static Dictionary<int, PacketHandler> packetHandlers;
-        private static int MaxPlayers { get; set; }
+        public static int MaxPlayers { get; set; }
         private static int Port { get; set; }
         public static Dictionary<int, Client> Clients { get; set; }
 
@@ -57,5 +57,7 @@ namespace ServerTest
                              {{(int) ClientPackets.WelcomeReceived, ServerHandler.WelcomeReceived}};
             Console.WriteLine("Initialized packets.");
         }
+
+        public static void SendUDPData(IPEndPoint endPoint, Packet packet) { throw new NotImplementedException(); }
     }
 }

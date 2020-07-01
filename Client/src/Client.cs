@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
+using System.Net.Sockets;
 using System.Windows;
 
 namespace ServerTest
@@ -11,10 +13,10 @@ namespace ServerTest
         public static Client Instance;
 
         private static Dictionary<int, PacketHandler> packetHandlers;
-        public int Id = 0;
+        public int Id;
         public string Ip = "127.0.0.1";
         public Tcp Tcp;
-        public Udp Udp;
+        public Udp udp;
 
         public static void Init()
         {
@@ -32,7 +34,7 @@ namespace ServerTest
         private void Start()
         {
             Tcp = new ClientTcp();
-            Udp = new ClientUdp(Ip, Port);
+            udp = new Udp(Ip, Port, ref Id);
         }
 
         public void ConnectToServer()
@@ -62,15 +64,85 @@ namespace ServerTest
             }
         }
 
-        public class ClientUdp : Udp
+        public class Udp
         {
-            public ClientUdp(string ip, int port) : base(ip, port) { }
+            protected readonly int Id;
+            public IPEndPoint EndPoint;
+            public UdpClient Socket;
 
-            protected override void ExecuteOnMainThread(byte[] packetBytes, int id)
+            public Udp(string ip, int port, ref int id)
             {
+                Id = id;
+                EndPoint = new IPEndPoint(IPAddress.Parse(ip), port);
+            }
+
+            public void Connect(int localPort)
+            {
+                Socket = new UdpClient(localPort);
+
+                Socket.Connect(EndPoint);
+
+                Socket.BeginReceive(ReceiveCallback, null);
+
+                using var packet = new Packet();
+                SendData(packet);
+            }
+
+            private void ReceiveCallback(IAsyncResult result)
+            {
+                try
+                {
+                    var data = Socket.EndReceive(result, ref EndPoint);
+                    Socket.BeginReceive(ReceiveCallback, null);
+
+                    if (data.Length < 4)
+                        //TODO Disconnect
+                        return;
+
+                    HandleData(data);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine($"Error receiving Server Data: {e}");
+                    //TODO Disconnect
+                }
+            }
+
+            public void SendData(Packet packet)
+            {
+                try
+                {
+                    packet.InsertInt(Id);
+                    Socket?.BeginSend(packet.ToArray(), packet.Length(), null, null);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine($"Error sending data to Player {Id} via Udp: {e}");
+                }
+            }
+
+            public void SendData(IPEndPoint clientEndpoint, Packet packet)
+            {
+                try
+                {
+                    Socket?.BeginSend(packet.ToArray(), packet.Length(), null, null);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine($"Error sending data to Player {clientEndpoint} via Udp: {e}");
+                }
+            }
+
+            private void HandleData(byte[] data)
+            {
+                using var packet = new Packet(data);
+
+                var packetLength = packet.ReadInt();
+                data = packet.ReadBytes(packetLength);
+
                 Application.Current.Dispatcher.Invoke(() =>
                                                       {
-                                                          using var packet = new Packet(packetBytes);
+                                                          using var packet = new Packet(data);
                                                           var packetId = packet.ReadInt();
                                                           packetHandlers[packetId](packet);
                                                       });
