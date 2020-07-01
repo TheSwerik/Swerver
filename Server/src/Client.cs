@@ -56,6 +56,8 @@ namespace ServerTest
                 _receiveBuffer = new byte[BufferSize];
 
                 _stream.BeginRead(_receiveBuffer, 0, BufferSize, ReceiveCallback, null);
+
+                ServerSend.Welcome(_id, "Welcome to the Server.");
             }
 
             private void ReceiveCallback(IAsyncResult result)
