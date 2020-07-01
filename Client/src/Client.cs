@@ -1,7 +1,6 @@
 ﻿using System.Diagnostics;
-using ServerTest;
 
-namespace Client
+namespace ServerTest
 {
     public class Client
     {
