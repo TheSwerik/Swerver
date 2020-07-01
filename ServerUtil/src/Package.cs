@@ -62,17 +62,15 @@ namespace ServerTest
 
         protected virtual void Dispose(bool disposing)
         {
-            if (!_disposed)
+            if (_disposed) return;
+            if (disposing)
             {
-                if (disposing)
-                {
-                    _buffer = null;
-                    _readableBuffer = null;
-                    _readPos = 0;
-                }
-
-                _disposed = true;
+                _buffer = null;
+                _readableBuffer = null;
+                _readPos = 0;
             }
+
+            _disposed = true;
         }
 
         #region Functions
@@ -182,17 +180,13 @@ namespace ServerTest
         /// <param name="moveReadPos">Whether or not to move the buffer's read position.</param>
         public byte ReadByte(bool moveReadPos = true)
         {
-            if (_buffer.Count > _readPos)
-            {
-                // If there are unread bytes
-                var value = _readableBuffer[_readPos]; // Get the byte at readPos' position
-                if (moveReadPos)
-                    // If _moveReadPos is true
-                    _readPos += 1; // Increase readPos by 1
-                return value; // Return the byte
-            }
-
-            throw new Exception("Could not read value of type 'byte'!");
+            if (_buffer.Count <= _readPos) throw new Exception("Could not read value of type 'byte'!");
+            // If there are unread bytes
+            var value = _readableBuffer[_readPos]; // Get the byte at readPos' position
+            if (moveReadPos)
+                // If _moveReadPos is true
+                _readPos += 1; // Increase readPos by 1
+            return value; // Return the byte
         }
 
         /// <summary>Reads an array of bytes from the packet.</summary>
@@ -200,104 +194,80 @@ namespace ServerTest
         /// <param name="moveReadPos">Whether or not to move the buffer's read position.</param>
         public byte[] ReadBytes(int length, bool moveReadPos = true)
         {
-            if (_buffer.Count > _readPos)
-            {
-                // If there are unread bytes
-                var value =
-                    _buffer.GetRange(_readPos, length)
-                           .ToArray(); // Get the bytes at readPos' position with a range of _length
-                if (moveReadPos)
-                    // If _moveReadPos is true
-                    _readPos += length; // Increase readPos by _length
-                return value; // Return the bytes
-            }
-
-            throw new Exception("Could not read value of type 'byte[]'!");
+            if (_buffer.Count <= _readPos) throw new Exception("Could not read value of type 'byte[]'!");
+            // If there are unread bytes
+            var value =
+                _buffer.GetRange(_readPos, length)
+                       .ToArray(); // Get the bytes at readPos' position with a range of _length
+            if (moveReadPos)
+                // If _moveReadPos is true
+                _readPos += length; // Increase readPos by _length
+            return value; // Return the bytes
         }
 
         /// <summary>Reads a short from the packet.</summary>
         /// <param name="moveReadPos">Whether or not to move the buffer's read position.</param>
         public short ReadShort(bool moveReadPos = true)
         {
-            if (_buffer.Count > _readPos)
-            {
-                // If there are unread bytes
-                var value = BitConverter.ToInt16(_readableBuffer, _readPos); // Convert the bytes to a short
-                if (moveReadPos)
-                    // If _moveReadPos is true and there are unread bytes
-                    _readPos += 2; // Increase readPos by 2
-                return value; // Return the short
-            }
-
-            throw new Exception("Could not read value of type 'short'!");
+            if (_buffer.Count <= _readPos) throw new Exception("Could not read value of type 'short'!");
+            // If there are unread bytes
+            var value = BitConverter.ToInt16(_readableBuffer, _readPos); // Convert the bytes to a short
+            if (moveReadPos)
+                // If _moveReadPos is true and there are unread bytes
+                _readPos += 2; // Increase readPos by 2
+            return value; // Return the short
         }
 
         /// <summary>Reads an int from the packet.</summary>
         /// <param name="moveReadPos">Whether or not to move the buffer's read position.</param>
         public int ReadInt(bool moveReadPos = true)
         {
-            if (_buffer.Count > _readPos)
-            {
-                // If there are unread bytes
-                var value = BitConverter.ToInt32(_readableBuffer, _readPos); // Convert the bytes to an int
-                if (moveReadPos)
-                    // If _moveReadPos is true
-                    _readPos += 4; // Increase readPos by 4
-                return value; // Return the int
-            }
-
-            throw new Exception("Could not read value of type 'int'!");
+            if (_buffer.Count <= _readPos) throw new Exception("Could not read value of type 'int'!");
+            // If there are unread bytes
+            var value = BitConverter.ToInt32(_readableBuffer, _readPos); // Convert the bytes to an int
+            if (moveReadPos)
+                // If _moveReadPos is true
+                _readPos += 4; // Increase readPos by 4
+            return value; // Return the int
         }
 
         /// <summary>Reads a long from the packet.</summary>
         /// <param name="moveReadPos">Whether or not to move the buffer's read position.</param>
         public long ReadLong(bool moveReadPos = true)
         {
-            if (_buffer.Count > _readPos)
-            {
-                // If there are unread bytes
-                var value = BitConverter.ToInt64(_readableBuffer, _readPos); // Convert the bytes to a long
-                if (moveReadPos)
-                    // If _moveReadPos is true
-                    _readPos += 8; // Increase readPos by 8
-                return value; // Return the long
-            }
-
-            throw new Exception("Could not read value of type 'long'!");
+            if (_buffer.Count <= _readPos) throw new Exception("Could not read value of type 'long'!");
+            // If there are unread bytes
+            var value = BitConverter.ToInt64(_readableBuffer, _readPos); // Convert the bytes to a long
+            if (moveReadPos)
+                // If _moveReadPos is true
+                _readPos += 8; // Increase readPos by 8
+            return value; // Return the long
         }
 
         /// <summary>Reads a float from the packet.</summary>
         /// <param name="moveReadPos">Whether or not to move the buffer's read position.</param>
         public float ReadFloat(bool moveReadPos = true)
         {
-            if (_buffer.Count > _readPos)
-            {
-                // If there are unread bytes
-                var value = BitConverter.ToSingle(_readableBuffer, _readPos); // Convert the bytes to a float
-                if (moveReadPos)
-                    // If _moveReadPos is true
-                    _readPos += 4; // Increase readPos by 4
-                return value; // Return the float
-            }
-
-            throw new Exception("Could not read value of type 'float'!");
+            if (_buffer.Count <= _readPos) throw new Exception("Could not read value of type 'float'!");
+            // If there are unread bytes
+            var value = BitConverter.ToSingle(_readableBuffer, _readPos); // Convert the bytes to a float
+            if (moveReadPos)
+                // If _moveReadPos is true
+                _readPos += 4; // Increase readPos by 4
+            return value; // Return the float
         }
 
         /// <summary>Reads a bool from the packet.</summary>
         /// <param name="moveReadPos">Whether or not to move the buffer's read position.</param>
         public bool ReadBool(bool moveReadPos = true)
         {
-            if (_buffer.Count > _readPos)
-            {
-                // If there are unread bytes
-                var value = BitConverter.ToBoolean(_readableBuffer, _readPos); // Convert the bytes to a bool
-                if (moveReadPos)
-                    // If _moveReadPos is true
-                    _readPos += 1; // Increase readPos by 1
-                return value; // Return the bool
-            }
-
-            throw new Exception("Could not read value of type 'bool'!");
+            if (_buffer.Count <= _readPos) throw new Exception("Could not read value of type 'bool'!");
+            // If there are unread bytes
+            var value = BitConverter.ToBoolean(_readableBuffer, _readPos); // Convert the bytes to a bool
+            if (moveReadPos)
+                // If _moveReadPos is true
+                _readPos += 1; // Increase readPos by 1
+            return value; // Return the bool
         }
 
         /// <summary>Reads a string from the packet.</summary>
