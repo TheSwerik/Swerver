@@ -5,8 +5,4 @@
         <RootNamespace>ServerLibrary</RootNamespace>
     </PropertyGroup>
 
-    <ItemGroup>
-        <Folder Include="src\Client"/>
-    </ItemGroup>
-
 </Project>
