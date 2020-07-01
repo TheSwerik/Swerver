@@ -35,8 +35,8 @@ namespace ServerTest
 
             for (var i = 1; i <= MaxPlayers; i++)
             {
-                if (Clients[i].Tcp.Socket != null) continue;
-                Clients[i].Tcp.Connect(client);
+                if (Clients[i].tcp.Socket != null) continue;
+                Clients[i].tcp.Connect(client);
                 return;
             }
 
