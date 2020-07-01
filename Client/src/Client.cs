@@ -13,7 +13,8 @@ namespace ServerTest
         private static Dictionary<int, PacketHandler> packetHandlers;
         public int Id = 0;
         public string Ip = "127.0.0.1";
-        public Tcp tcp;
+        public Tcp Tcp;
+        public Udp Udp;
 
         public static void Init()
         {
@@ -28,12 +29,16 @@ namespace ServerTest
             }
         }
 
-        private void Start() { tcp = new ClientTcp(); }
+        private void Start()
+        {
+            Tcp = new ClientTcp();
+            Udp = new ClientUdp(Ip, Port);
+        }
 
         public void ConnectToServer()
         {
             InitializeClientData();
-            tcp.Connect(Ip, Port);
+            Tcp.Connect(Ip, Port);
         }
 
         private static void InitializeClientData()
@@ -46,7 +51,22 @@ namespace ServerTest
 
         public class ClientTcp : Tcp
         {
-            protected override void ExecuteOnMainThread(byte[] packetBytes, in int id)
+            protected override void ExecuteOnMainThread(byte[] packetBytes, int id)
+            {
+                Application.Current.Dispatcher.Invoke(() =>
+                                                      {
+                                                          using var packet = new Packet(packetBytes);
+                                                          var packetId = packet.ReadInt();
+                                                          packetHandlers[packetId](packet);
+                                                      });
+            }
+        }
+
+        public class ClientUdp : Udp
+        {
+            public ClientUdp(string ip, int port) : base(ip, port) { }
+
+            protected override void ExecuteOnMainThread(byte[] packetBytes, int id)
             {
                 Application.Current.Dispatcher.Invoke(() =>
                                                       {

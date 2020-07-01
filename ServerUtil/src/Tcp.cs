@@ -93,7 +93,7 @@ namespace ServerTest
             }
             catch (Exception e)
             {
-                Console.WriteLine($"Error receiving ServerUtil Data: {e}");
+                Console.WriteLine($"Error receiving Server Data: {e}");
                 //TODO Disconnect
             }
         }
@@ -114,12 +114,6 @@ namespace ServerTest
             {
                 var packetBytes = _receivedData.ReadBytes(packetLength);
                 ExecuteOnMainThread(packetBytes, Id);
-                // ExecuteOnMainThread(() =>
-                // {
-                // using var packet = new Packet(packetBytes);
-                // var packetId = packet.ReadInt();
-                // Server.packetHandlers[packetId](_id, packet);
-                // });
                 packetLength = 0;
 
                 if (_receivedData.UnreadLength() < 4) continue;
@@ -130,7 +124,7 @@ namespace ServerTest
             return packetLength <= 1;
         }
 
-        protected abstract void ExecuteOnMainThread(byte[] packetBytes, in int id);
+        protected abstract void ExecuteOnMainThread(byte[] packetBytes, int id);
 
         private delegate void PacketHandler(Packet packet);
     }

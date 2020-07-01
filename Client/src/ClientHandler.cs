@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 
 namespace ServerTest
 {
@@ -12,6 +13,8 @@ namespace ServerTest
             Console.WriteLine($"Message Received: {msg}");
             Client.Instance.Id = id;
             ClientSend.WelcomeReceived();
+
+            Client.Instance.Udp.Connect(((IPEndPoint) Client.Instance.Tcp.Socket.Client.LocalEndPoint).Port);
         }
     }
 }

@@ -15,7 +15,7 @@
         {
             public ServerTcp(int id) : base(id) { }
 
-            protected override void ExecuteOnMainThread(byte[] packetBytes, in int id)
+            protected override void ExecuteOnMainThread(byte[] packetBytes, int id)
             {
                 ThreadManager.ExecuteOnMainThread(() =>
                                                   {

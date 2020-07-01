@@ -2,12 +2,20 @@
 {
     public static class ClientSend
     {
-        /// <summary>Send TCP Data to a Client.</summary>
+        /// <summary>Send TCP Data to the Server.</summary>
         /// <param name="packet">Data to be sent</param>
         private static void SendTcpData(Packet packet)
         {
             packet.WriteLength();
-            Client.Instance.tcp.SendData(packet);
+            Client.Instance.Tcp.SendData(packet);
+        }
+
+        /// <summary>Send UDP Data to the Server.</summary>
+        /// <param name="packet">Data to be sent</param>
+        private static void SendUdpData(Packet packet)
+        {
+            packet.WriteLength();
+            Client.Instance.Udp.SendData(packet);
         }
 
         public static void WelcomeReceived()
