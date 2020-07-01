@@ -7,10 +7,10 @@ namespace ServerTest
 {
     public static class Server
     {
+        private static TcpListener _tcpListener;
         private static int MaxPlayers { get; set; }
         private static int Port { get; set; }
         private static Dictionary<int, Client> Clients { get; set; }
-        private static TcpListener _tcpListener;
 
         public static void Start(int maxPlayers, int port)
         {

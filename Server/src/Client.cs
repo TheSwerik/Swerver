@@ -1,7 +1,4 @@
-﻿using System;
-using System.Net.Sockets;
-
-namespace ServerTest
+﻿namespace ServerTest
 {
     public class Client
     {
@@ -13,6 +10,5 @@ namespace ServerTest
             _id = id;
             Tcp = new Tcp(_id);
         }
-
     }
 }

@@ -8,7 +8,7 @@ namespace ServerTest
         {
             Console.Title = "Server";
             Console.WriteLine("Starting Server...");
-            Server.Start(50,46551);
+            Server.Start(50, 46551);
             Console.ReadKey();
         }
     }

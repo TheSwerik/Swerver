@@ -6,10 +6,10 @@ namespace ServerTest
     public class Tcp
     {
         private const int BufferSize = 4096;
-        public TcpClient Socket;
         private int _id;
-        private NetworkStream _stream;
         private byte[] _receiveBuffer;
+        private NetworkStream _stream;
+        public TcpClient Socket;
         public Tcp(int id) { _id = id; }
 
         public void Connect(TcpClient socket)
