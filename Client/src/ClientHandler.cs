@@ -11,8 +11,7 @@ namespace ServerTest
 
             Console.WriteLine($"Message Received: {msg}");
             Client.Instance.Id = id;
-
-            //TODO send back
+            ClientSend.WelcomeReceived();
         }
     }
 }

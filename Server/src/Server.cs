@@ -7,7 +7,11 @@ namespace ServerTest
 {
     public static class Server
     {
+        public delegate void PacketHandler(int client, Packet packet);
+
         private static TcpListener _tcpListener;
+
+        public static Dictionary<int, PacketHandler> packetHandlers;
         private static int MaxPlayers { get; set; }
         private static int Port { get; set; }
         public static Dictionary<int, Client> Clients { get; set; }
@@ -46,6 +50,10 @@ namespace ServerTest
         private static void InitializeServerData()
         {
             for (var i = 1; i <= MaxPlayers; i++) Clients.Add(i, new Client(i));
+
+            packetHandlers = new Dictionary<int, PacketHandler>
+                             {{(int) ClientPackets.WelcomeReceived, ServerHandler.WelcomeReceived}};
+            Console.WriteLine("Initialized packets.");
         }
     }
 }
