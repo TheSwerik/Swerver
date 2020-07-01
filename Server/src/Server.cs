@@ -18,6 +18,8 @@ namespace ServerTest
 
         public static void Start(int maxPlayers, int port)
         {
+            Console.WriteLine("Starting Server...");
+
             MaxPlayers = maxPlayers;
             Port = port;
 
