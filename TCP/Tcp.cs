@@ -11,7 +11,40 @@ namespace ServerTest
         private NetworkStream _stream;
         public TcpClient Socket;
         public Tcp(int id) { _id = id; }
+        public Tcp() { }
 
+        /*
+         * For Client
+         */
+        public void Connect(string ip, int port)
+        {
+            Socket = new TcpClient
+                     {
+                         ReceiveBufferSize = BufferSize,
+                         SendBufferSize = BufferSize
+                     };
+
+            _receiveBuffer = new byte[BufferSize];
+            Socket.BeginConnect(ip, port, ConnectCallback, Socket);
+        }
+
+        /*
+         * For Client
+         */
+        private void ConnectCallback(IAsyncResult result)
+        {
+            Socket.EndConnect(result);
+
+            if (!Socket.Connected) return;
+
+            _stream = Socket.GetStream();
+
+            _stream.BeginRead(_receiveBuffer, 0, BufferSize, ReceiveCallback, null);
+        }
+
+        /*
+         * For Server
+         */
         public void Connect(TcpClient socket)
         {
             Socket = socket;
@@ -23,6 +56,9 @@ namespace ServerTest
             _stream.BeginRead(_receiveBuffer, 0, BufferSize, ReceiveCallback, null);
         }
 
+        /*
+         * For Server
+         */
         private void ReceiveCallback(IAsyncResult result)
         {
             try
