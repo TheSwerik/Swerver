@@ -1,4 +1,3 @@
-using System;
 using Swerver.Server;
 
 namespace SwerverTestServer
@@ -7,9 +6,9 @@ namespace SwerverTestServer
     {
         internal static void Main() { ServerStarter.Start(new EmptyLogic()); }
 
-        internal class EmptyLogic : GameLogic
+        private class EmptyLogic : GameLogic
         {
-            protected override void Update(int delta) { Console.WriteLine(delta); }
+            protected override void Update(int delta) { }
         }
     }
 }

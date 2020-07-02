@@ -12,6 +12,7 @@ namespace SwerverTestClient
         {
             InitializeComponent();
             Client.Init(new TcpImpl(), new UdpImpl());
+            Client.Instance.ConnectToServer();
         }
     }
 }

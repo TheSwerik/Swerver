@@ -8,12 +8,10 @@ namespace Swerver.Server
         public static void WelcomeReceived(int client, Packet packet)
         {
             var id = packet.ReadInt();
-            var username = packet.ReadString();
 
             Console.WriteLine(
                 $"{Server.Clients[client].Tcp.Socket.Client.RemoteEndPoint} connected successfully and is now player {client}.");
-            if (client != id)
-                Console.WriteLine($"Player \"{username}\" (ID: {client}) has assumed the wrong client ID ({id})!");
+            if (client != id) Console.WriteLine($"Player (ID: {client}) has assumed the wrong client ID ({id})!");
 
             // TODO: send player into game
         }

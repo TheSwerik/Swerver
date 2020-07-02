@@ -30,7 +30,6 @@ namespace Swerver.Client
         {
             using var packet = new Packet((int) ClientPackets.WelcomeReceived);
             packet.Write(Client.Instance.Id);
-            packet.Write(Client.Instance.Username);
 
             SendTcpData(packet);
         }

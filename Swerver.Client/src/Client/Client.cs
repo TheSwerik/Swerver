@@ -9,22 +9,19 @@ namespace Swerver.Client
         public delegate void PacketHandler(Packet packet);
 
         private const int BufferSize = 4096;
-        public const int Port = 46551;
         public static Client Instance;
 
         public static Dictionary<int, PacketHandler> PacketHandlers;
         public int Id;
-        public string Ip;
         public Tcp Tcp;
         public Udp Udp;
-        public string Username;
 
-        public static void Init(Tcp tcp, Udp udp, string ip = "127.0.0.1")
+        public static void Init(Tcp tcp, Udp udp)
         {
             if (Instance == null)
             {
-                Instance = new Client {Tcp = tcp, Udp = udp, Ip = ip};
-                Instance.Udp.Init(Instance.Ip, Port);
+                Instance = new Client {Tcp = tcp, Udp = udp};
+                Instance.Udp.Init(Constants.Ip, Constants.Port);
             }
             else
             {
@@ -35,7 +32,7 @@ namespace Swerver.Client
         public void ConnectToServer()
         {
             InitializeClientData();
-            Tcp.Connect(Ip, Port);
+            Tcp.Connect();
         }
 
         private static void InitializeClientData()

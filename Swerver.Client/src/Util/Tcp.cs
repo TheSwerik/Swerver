@@ -18,7 +18,7 @@ namespace Swerver.Util
         /// <summary>This should only be used by the Client!</summary>
         /// <param name="ip">Server IP</param>
         /// <param name="port">Server Port</param>
-        public void Connect(string ip, int port)
+        public void Connect()
         {
             Socket = new TcpClient
                      {
@@ -29,26 +29,7 @@ namespace Swerver.Util
             _receiveBuffer = new byte[BufferSize];
             _receivedData = new Packet();
 
-            Socket.BeginConnect(ip, port, ConnectCallback, Socket);
-        }
-
-        /// <summary>This should only be used by the Server!</summary>
-        /// <param name="socket"></param>
-        /// <param name="sendWelcome">The Send Method</param>
-        public void Connect(TcpClient socket, Action<int, string> sendWelcome)
-        {
-            Socket = socket;
-            Socket.ReceiveBufferSize = Socket.SendBufferSize = BufferSize;
-
-            _stream = Socket.GetStream();
-
-            _receiveBuffer = new byte[BufferSize];
-            _receivedData = new Packet();
-
-
-            _stream.BeginRead(_receiveBuffer, 0, BufferSize, ReceiveCallback, null);
-
-            sendWelcome(Id, "Welcome to the Server.");
+            Socket.BeginConnect(Constants.Ip, Constants.Port, ConnectCallback, Socket);
         }
 
         private void ConnectCallback(IAsyncResult result)
