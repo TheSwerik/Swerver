@@ -3,18 +3,18 @@ A Networking Library primarily for games but can also be used for other stuff.
 
 # How to use
 ### Starting
-Inherit from `ServerLibrary.Server.GameLogic` and write your Game-Logic in the `Update` Method
+Inherit from `Swerver.Server.GameLogic` and write your Game-Logic in the `Update` Method
 
 ### Client-Server Communication
 #### Server
-* For Server sending, write methods that look like ServerLibrary.Server.ServerSend Welcome and UdpTest.
-* For Server receiving, add a Method to the Servers PacketHandlers. Method Examples are ServerLibrary.Server.ServerHandler WelcomeReceived and UdpTestReceived.
+* For Server sending, write methods that look like `Swerver.Server.ServerSend` Welcome and UdpTest.
+* For Server receiving, add a Method to the Servers `PacketHandlers`. Method Examples are `Swerver.Server.ServerHandler`'s WelcomeReceived and UdpTestReceived.
 #### Client
 * Inherit from Udp and from Tcp and override `ExecuteOnMainThread` so that the Action executes on your main Thread. (examples below)
 * Run `Client.Init(tcp, udp);` with your inherited Udp and Tcp Classes.
     * You can enter an Ip there aswell (`Client.Init(tcp, udp, ip);`) 
-* For Client sending, write methods that look like ServerLibrary.Server.ServerSend Welcome and UdpTest.
-* For Client receiving, add a Method to the Servers PacketHandlers. Method Examples are ServerLibrary.Server.ServerHandler WelcomeReceived and UdpTestReceived.
+* For Client sending, write methods that look like Swerver.Server.ServerSend Welcome and UdpTest.
+* For Client receiving, add a Method to the Servers PacketHandlers. Method Examples are Swerver.Server.ServerHandler WelcomeReceived and UdpTestReceived.
 ### Examples
 #### ExecuteOnMainThread
 For Console App, use the `Client.ThreadManager` class:
