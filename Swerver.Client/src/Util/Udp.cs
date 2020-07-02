@@ -9,8 +9,7 @@ namespace ServerLibrary.Client
     {
         private IPEndPoint _endPoint;
         private UdpClient _socket;
-
-        protected Udp(string ip, int port) { _endPoint = new IPEndPoint(IPAddress.Parse(ip), port); }
+        public void Init(string ip, int port) { _endPoint = new IPEndPoint(IPAddress.Parse(ip), port); }
 
         internal void Connect(int localPort)
         {

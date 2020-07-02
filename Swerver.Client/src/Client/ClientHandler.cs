@@ -2,7 +2,7 @@
 using System.Net;
 using ServerLibrary.Util;
 
-namespace ServerLibrary.Client
+namespace Swerver.Client
 {
     public class ClientHandler
     {
@@ -12,11 +12,11 @@ namespace ServerLibrary.Client
             var id = packet.ReadInt();
 
             Console.WriteLine($"Message Received: {msg}");
-            Swerver.Client.Client.Client.Instance.Id = id;
+            Client.Client.Instance.Id = id;
             ClientSend.WelcomeReceived();
 
-            Swerver.Client.Client.Client.Instance.Udp.Connect(
-                ((IPEndPoint) Swerver.Client.Client.Client.Instance.Tcp.Socket.Client.LocalEndPoint).Port);
+            Client.Client.Instance.Udp.Connect(
+                ((IPEndPoint) Client.Client.Instance.Tcp.Socket.Client.LocalEndPoint).Port);
         }
 
         public static void UdpTest(Packet packet)

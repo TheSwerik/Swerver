@@ -1,6 +1,6 @@
 ﻿using ServerLibrary.Util;
 
-namespace ServerLibrary.Client
+namespace Swerver.Client
 {
     public static class ClientSend
     {
@@ -9,7 +9,7 @@ namespace ServerLibrary.Client
         private static void SendTcpData(Packet packet)
         {
             packet.WriteLength();
-            Swerver.Client.Client.Client.Instance.Tcp.SendData(packet);
+            Client.Client.Instance.Tcp.SendData(packet);
         }
 
         /// <summary>Send UDP Data to the Server.</summary>
@@ -17,13 +17,13 @@ namespace ServerLibrary.Client
         private static void SendUdpData(Packet packet)
         {
             packet.WriteLength();
-            Swerver.Client.Client.Client.Instance.Udp.SendData(packet);
+            Client.Client.Instance.Udp.SendData(packet);
         }
 
         public static void WelcomeReceived()
         {
             using var packet = new Packet((int) ClientPackets.WelcomeReceived);
-            packet.Write(Swerver.Client.Client.Client.Instance.Id);
+            packet.Write(Client.Client.Instance.Id);
             packet.Write(MainWindow.Username);
 
             SendTcpData(packet);

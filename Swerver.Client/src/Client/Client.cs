@@ -19,23 +19,17 @@ namespace Swerver.Client
         public Tcp Tcp;
         public Udp udp;
 
-        public static void Init()
+        public static void Init(Tcp tcp, Udp udp)
         {
             if (Instance == null)
             {
-                Instance = new Client();
-                Instance.Start();
+                Instance = new Client {Tcp = tcp, udp = udp};
+                Instance.udp.Init(Instance.Ip, Port);
             }
             else
             {
                 Console.WriteLine("Instance already exists, destroying Object!");
             }
-        }
-
-        private void Start()
-        {
-            Tcp = new ClientTcp();
-            udp = new Udp(Ip, Port);
         }
 
         public void ConnectToServer()
