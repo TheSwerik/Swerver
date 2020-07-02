@@ -22,7 +22,7 @@ namespace ServerLibrary.Server
             Console.Title = "Server";
             _isRunning = true;
 
-            _gameLogic = new GameLogic();
+            _gameLogic = gameLogic;
 
             var mainThread = new Thread(MainThread);
             mainThread.Start();

@@ -14,4 +14,4 @@ For Client sending, write methods that look like ServerLibrary.Server.ServerSend
 For Client receiving, add a Method to the Servers PacketHandlers. Method Examples are ServerLibrary.Server.ServerHandler WelcomeReceived and UdpTestReceived.
 
 # Credits
-I folloed [this tutorial](https://www.youtube.com/playlist?list=PLXkn83W0QkfnqsK8I0RAz5AbUxfg3bOQ5) for most of the code.
+I followed [this tutorial](https://www.youtube.com/playlist?list=PLXkn83W0QkfnqsK8I0RAz5AbUxfg3bOQ5) for most of the code.
