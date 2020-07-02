@@ -9,8 +9,9 @@ A Networking Library primarily for games but can also be used for other stuff.
 * For Server receiving, add a Method to the Servers `PacketHandlers`. Method Examples are `Swerver.Server.ServerHandler`'s `WelcomeReceived` and `UdpTestReceived`.
 ### Client
 * Inherit from Udp and from Tcp and override `ExecuteOnMainThread` so that the Action executes on your main Thread. (examples below)
-* Run `Client.Init(tcp, udp);` with your inherited Udp and Tcp Classes.
+* Call `Client.Init(tcp, udp);` with your inherited Udp and Tcp Classes.
     * You can enter an Ip there aswell (`Client.Init(tcp, udp, ip);`) 
+* Call `Client.Instance.ConnectToServer();` to connect to the Server.
 * For Client sending, write methods that look like Swerver.Server.ServerSend Welcome and UdpTest.
 * For Client receiving, add a Method to the Servers PacketHandlers. Method Examples are Swerver.Server.ServerHandler WelcomeReceived and UdpTestReceived.
 ### Examples
@@ -29,5 +30,9 @@ protected override void ExecuteOnMainThread(Action action)
     Application.Current.Dispatcher.Invoke(action);
 }
 ```
+# Things you can change:
+### Client
+* IP of the Server with `Constants.Ip`
+* Port of the Server with `Constants.Port`
 # Credits
 I followed [this tutorial](https://www.youtube.com/playlist?list=PLXkn83W0QkfnqsK8I0RAz5AbUxfg3bOQ5) for most of the code.
