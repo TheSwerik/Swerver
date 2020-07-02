@@ -15,7 +15,7 @@ namespace ServerLibrary.Client
             Client.Instance.Id = id;
             ClientSend.WelcomeReceived();
 
-            Client.Instance.udp.Connect(((IPEndPoint) Client.Instance.Tcp.Socket.Client.LocalEndPoint).Port);
+            Client.Instance.Udp.Connect(((IPEndPoint) Client.Instance.Tcp.Socket.Client.LocalEndPoint).Port);
         }
 
         public static void UdpTest(Packet packet)

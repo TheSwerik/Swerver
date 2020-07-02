@@ -53,7 +53,7 @@ namespace ServerLibrary.Client
             Console.WriteLine("Initialized packets.");
         }
 
-        private delegate void PacketHandler(Packet packet);
+        public delegate void PacketHandler(Packet packet);
 
         public abstract class ClientTcp : Tcp
         {

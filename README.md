@@ -13,9 +13,9 @@ For Server receiving, add a Method to the Servers PacketHandlers. Method Example
 * Inherit from Udp and from ClientTcp and override `ExecuteOnMainThread` so that the Action executes on your main Thread. (examples below)
 For Client sending, write methods that look like ServerLibrary.Server.ServerSend Welcome and UdpTest.
 For Client receiving, add a Method to the Servers PacketHandlers. Method Examples are ServerLibrary.Server.ServerHandler WelcomeReceived and UdpTestReceived.
-##### Examples
-For Console App:
-Use the `Server.ThreadManager` class.
+### Examples
+#### ExecuteOnMainThread
+For Console App, use the `Client.ThreadManager` class:
 ```c#
 protected override void ExecuteOnMainThread(Action action)
 {

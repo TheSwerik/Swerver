@@ -12,6 +12,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Swerver.Server", "Swerver.S
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Swerver.Client", "Swerver.Client\Swerver.Client.csproj", "{49069A88-6F39-4274-98C6-16B185529970}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SwerverTestClient", "SwerverTestClient\SwerverTestClient.csproj", "{1E84901B-C19D-455A-A782-A1767531821D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,5 +44,9 @@ Global
 		{49069A88-6F39-4274-98C6-16B185529970}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{49069A88-6F39-4274-98C6-16B185529970}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{49069A88-6F39-4274-98C6-16B185529970}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E84901B-C19D-455A-A782-A1767531821D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E84901B-C19D-455A-A782-A1767531821D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E84901B-C19D-455A-A782-A1767531821D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E84901B-C19D-455A-A782-A1767531821D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

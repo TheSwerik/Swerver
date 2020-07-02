@@ -17,7 +17,7 @@ namespace ServerLibrary.Client
         private static void SendUdpData(Packet packet)
         {
             packet.WriteLength();
-            Client.Instance.udp.SendData(packet);
+            Client.Instance.Udp.SendData(packet);
         }
 
         public static void WelcomeReceived()
