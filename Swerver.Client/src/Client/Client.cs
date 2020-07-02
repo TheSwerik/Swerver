@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Net;
-using System.Net.Sockets;
 using ServerLibrary.Util;
 
 namespace ServerLibrary.Client
 {
     public class Client
     {
+        public delegate void PacketHandler(Packet packet);
+
         private const int BufferSize = 4096;
         public const int Port = 46551;
         public static Client Instance;
@@ -45,29 +45,12 @@ namespace ServerLibrary.Client
 
         private static void InitializeClientData()
         {
-            packetHandlers = new Dictionary<int, PacketHandler>
+            PacketHandlers = new Dictionary<int, PacketHandler>
                              {
                                  {(int) ServerPackets.Welcome, ClientHandler.Welcome},
                                  {(int) ServerPackets.UdpTest, ClientHandler.UdpTest}
                              };
             Console.WriteLine("Initialized packets.");
-        }
-
-        public delegate void PacketHandler(Packet packet);
-
-        public abstract class ClientTcp : Tcp
-        {
-            protected abstract void ExecuteOnMainThread(Action action);
-
-            protected override void ExecuteOnMainThread(byte[] packetBytes, int id)
-            {
-                ExecuteOnMainThread(() =>
-                                    {
-                                        using var packet = new Packet(packetBytes);
-                                        var packetId = packet.ReadInt();
-                                        packetHandlers[packetId](packet);
-                                    });
-            }
         }
     }
 }

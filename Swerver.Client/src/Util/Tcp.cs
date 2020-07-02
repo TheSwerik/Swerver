@@ -122,7 +122,17 @@ namespace ServerLibrary.Util
             return packetLength <= 1;
         }
 
-        protected abstract void ExecuteOnMainThread(byte[] packetBytes, int id);
+        protected abstract void ExecuteOnMainThread(Action action);
+
+        private void ExecuteOnMainThread(byte[] packetBytes, int id)
+        {
+            ExecuteOnMainThread(() =>
+                                {
+                                    using var packet = new Packet(packetBytes);
+                                    var packetId = packet.ReadInt();
+                                    Client.Client.PacketHandlers[packetId](packet);
+                                });
+        }
 
         private delegate void PacketHandler(Packet packet);
     }
