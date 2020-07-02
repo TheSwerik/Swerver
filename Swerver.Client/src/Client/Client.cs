@@ -8,9 +8,7 @@ namespace Swerver.Client
     {
         public delegate void PacketHandler(Packet packet);
 
-        private const int BufferSize = 4096;
         public static Client Instance;
-
         public static Dictionary<int, PacketHandler> PacketHandlers;
         public int Id;
         internal Tcp Tcp;

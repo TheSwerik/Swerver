@@ -58,10 +58,10 @@ namespace Swerver.Util
 
         private void HandleData(byte[] data)
         {
-            using var pckt = new Packet(data);
+            using var pkt = new Packet(data);
 
-            var packetLength = pckt.ReadInt();
-            data = pckt.ReadBytes(packetLength);
+            var packetLength = pkt.ReadInt();
+            data = pkt.ReadBytes(packetLength);
 
             ExecuteOnMainThread(() =>
                                 {

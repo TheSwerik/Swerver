@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
+// ReSharper disable UnusedMember.Global
+// ReSharper disable UnusedType.Global
+
 namespace Swerver.Util
 {
     public static class ThreadManager

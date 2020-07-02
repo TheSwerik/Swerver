@@ -1,4 +1,6 @@
-﻿using Swerver.Util;
+﻿// ReSharper disable MemberCanBePrivate.Global
+
+using Swerver.Util;
 
 namespace Swerver.Client
 {
