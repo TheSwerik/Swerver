@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Net;
 using System.Net.Sockets;
-using ServerLibrary.Util;
 
-namespace ServerLibrary.Client
+namespace Swerver.Util
 {
     public abstract class Udp
     {
@@ -47,13 +46,13 @@ namespace ServerLibrary.Client
         {
             try
             {
-                packet.InsertInt(Swerver.Client.Client.Client.Instance.Id);
+                packet.InsertInt(Client.Client.Client.Instance.Id);
                 _socket?.BeginSend(packet.ToArray(), packet.Length(), null, null);
             }
             catch (Exception e)
             {
                 Console.WriteLine(
-                    $"Error sending data to Player {Swerver.Client.Client.Client.Instance.Id} via Udp: {e}");
+                    $"Error sending data to Player {Client.Client.Client.Instance.Id} via Udp: {e}");
             }
         }
 
@@ -68,7 +67,7 @@ namespace ServerLibrary.Client
                                 {
                                     using var packet = new Packet(data);
                                     var packetId = packet.ReadInt();
-                                    Swerver.Client.Client.Client.PacketHandlers[packetId](packet);
+                                    Client.Client.Client.PacketHandlers[packetId](packet);
                                 });
         }
 

@@ -5,7 +5,7 @@ using System.Text;
 // ReSharper disable UnusedMember.Global
 // ReSharper disable UnusedType.Global
 
-namespace ServerLibrary.Util
+namespace Swerver.Util
 {
     /// <summary>Sent from server to client.</summary>
     public enum ServerPackets

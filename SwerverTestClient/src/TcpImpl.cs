@@ -1,5 +1,5 @@
 ﻿using System;
-using ServerLibrary.Util;
+using Swerver.Util;
 
 namespace SwerverTestClient
 {

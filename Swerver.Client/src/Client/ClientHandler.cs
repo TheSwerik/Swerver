@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Net;
-using ServerLibrary.Util;
+using Swerver.Util;
 
 namespace Swerver.Client
 {

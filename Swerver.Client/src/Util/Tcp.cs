@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net.Sockets;
 
-namespace ServerLibrary.Util
+namespace Swerver.Util
 {
     public abstract class Tcp
     {
@@ -130,7 +130,7 @@ namespace ServerLibrary.Util
                                 {
                                     using var packet = new Packet(packetBytes);
                                     var packetId = packet.ReadInt();
-                                    Swerver.Client.Client.Client.PacketHandlers[packetId](packet);
+                                    Client.Client.Client.PacketHandlers[packetId](packet);
                                 });
         }
 

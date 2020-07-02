@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Swerver.Client
+namespace Swerver.Util
 {
     public static class ThreadManager
     {

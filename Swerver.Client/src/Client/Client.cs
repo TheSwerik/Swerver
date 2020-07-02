@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using ServerLibrary.Client;
-using ServerLibrary.Util;
+using Swerver.Util;
 
 namespace Swerver.Client
 {
@@ -15,16 +14,16 @@ namespace Swerver.Client
 
         public static Dictionary<int, PacketHandler> PacketHandlers;
         public int Id;
-        public string Ip = "127.0.0.1";
+        public string Ip;
         public Tcp Tcp;
         public Udp Udp;
         public string Username;
 
-        public static void Init(Tcp tcp, Udp udp)
+        public static void Init(Tcp tcp, Udp udp, string ip = "127.0.0.1")
         {
             if (Instance == null)
             {
-                Instance = new Client {Tcp = tcp, Udp = udp};
+                Instance = new Client {Tcp = tcp, Udp = udp, Ip = ip};
                 Instance.Udp.Init(Instance.Ip, Port);
             }
             else
