@@ -11,7 +11,7 @@ namespace ServerLibrary.Server
 
         /// <summary>Sets an action to be executed on the main thread.</summary>
         /// <param name="action">The action to be executed on the main thread.</param>
-        public static void ExecuteOnMainThread(Action action)
+        internal static void ExecuteOnMainThread(Action action)
         {
             if (action == null)
             {
@@ -27,7 +27,7 @@ namespace ServerLibrary.Server
         }
 
         /// <summary>Executes all code meant to run on the main thread. NOTE: Call this ONLY from the main thread.</summary>
-        public static void UpdateMain()
+        internal static void UpdateMain()
         {
             if (!_actionToExecuteOnMainThread) return;
             ExecuteCopiedOnMainThread.Clear();

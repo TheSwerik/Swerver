@@ -3,8 +3,10 @@ using ServerLibrary.Util;
 
 namespace ServerLibrary.Server
 {
-    public class ServerSend
+    public static class ServerSend
     {
+        #region Send Methods
+
         /// <summary>Send TCP Data to a Client.</summary>
         /// <param name="client">ID of the Client</param>
         /// <param name="packet">Data to be sent</param>
@@ -20,7 +22,7 @@ namespace ServerLibrary.Server
         private static void SendUdpData(int client, Packet packet)
         {
             packet.WriteLength();
-            Server.Clients[client].udp.SendData(packet);
+            Server.Clients[client].Udp.SendData(packet);
         }
 
         /// <summary>Send TCP Data to all Clients.</summary>
@@ -51,7 +53,7 @@ namespace ServerLibrary.Server
         private static void SendUdpData(Packet packet)
         {
             packet.WriteLength();
-            for (var i = 1; i <= Server.MaxPlayers; i++) Server.Clients[i].udp.SendData(packet);
+            for (var i = 1; i <= Server.MaxPlayers; i++) Server.Clients[i].Udp.SendData(packet);
         }
 
         /// <summary>Send UDP Data to all Clients except one.</summary>
@@ -62,8 +64,10 @@ namespace ServerLibrary.Server
             packet.WriteLength();
             foreach (var client in Server.Clients
                                          .Where(c => c.Key != except)
-                                         .Select(a => a.Value)) client.udp.SendData(packet);
+                                         .Select(a => a.Value)) client.Udp.SendData(packet);
         }
+
+        #endregion
 
         #region Packets
 

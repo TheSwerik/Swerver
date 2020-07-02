@@ -1,7 +1,7 @@
 ﻿namespace ServerLibrary.Server
 {
-    public static class MainClass
+    internal static class MainClass
     {
-        private static void Main(string[] args) { ServerStarter.Start(new GameLogic()); }
+        internal static void Main(string[] args) { ServerStarter.Start(new GameLogic()); }
     }
 }

@@ -13,12 +13,12 @@ namespace ServerLibrary.Server
         private static TcpListener _tcpListener;
         private static UdpClient _udpListener;
 
-        public static Dictionary<int, PacketHandler> packetHandlers;
-        public static int MaxPlayers { get; set; }
+        public static Dictionary<int, PacketHandler> PacketHandlers;
+        public static int MaxPlayers { get; private set; }
         private static int Port { get; set; }
-        public static Dictionary<int, Client> Clients { get; set; }
+        public static Dictionary<int, Client> Clients { get; private set; }
 
-        public static void Start(int maxPlayers, int port)
+        internal static void Start(int maxPlayers, int port)
         {
             Console.WriteLine("Starting Server...");
 
@@ -69,14 +69,14 @@ namespace ServerLibrary.Server
 
                 if (clientId == 0) return;
 
-                if (Clients[clientId].udp.EndPoint == null)
+                if (Clients[clientId].Udp.EndPoint == null)
                 {
-                    Clients[clientId].udp.Connect(clientEndPoint);
+                    Clients[clientId].Udp.Connect(clientEndPoint);
                     return;
                 }
 
-                if (Clients[clientId].udp.EndPoint.ToString() == clientEndPoint.ToString())
-                    Clients[clientId].udp.HandleData(packet);
+                if (Clients[clientId].Udp.EndPoint.ToString() == clientEndPoint.ToString())
+                    Clients[clientId].Udp.HandleData(packet);
             }
             catch (Exception e)
             {
@@ -101,7 +101,7 @@ namespace ServerLibrary.Server
         {
             for (var i = 1; i <= MaxPlayers; i++) Clients.Add(i, new Client(i));
 
-            packetHandlers = new Dictionary<int, PacketHandler>
+            PacketHandlers = new Dictionary<int, PacketHandler>
                              {
                                  {(int) ClientPackets.WelcomeReceived, ServerHandler.WelcomeReceived},
                                  {(int) ClientPackets.UdpTestReceived, ServerHandler.UdpTestReceived}

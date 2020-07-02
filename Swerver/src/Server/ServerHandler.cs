@@ -3,9 +3,9 @@ using ServerLibrary.Util;
 
 namespace ServerLibrary.Server
 {
-    public class ServerHandler
+    public static class ServerHandler
     {
-        public static void WelcomeReceived(int client, Packet packet)
+        internal static void WelcomeReceived(int client, Packet packet)
         {
             var id = packet.ReadInt();
             var username = packet.ReadString();
@@ -18,7 +18,7 @@ namespace ServerLibrary.Server
             // TODO: send player into game
         }
 
-        public static void UdpTestReceived(int client, Packet packet)
+        internal static void UdpTestReceived(int client, Packet packet)
         {
             var msg = packet.ReadString();
 
