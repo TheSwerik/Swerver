@@ -6,19 +6,12 @@ namespace Swerver.Util
     public abstract class Tcp
     {
         private const int BufferSize = 4096;
-        protected readonly int Id;
         private byte[] _receiveBuffer;
         private Packet _receivedData;
         private NetworkStream _stream;
-        public TcpClient Socket;
+        internal TcpClient Socket;
 
-        protected Tcp(int id) { Id = id; }
-        protected Tcp() { }
-
-        /// <summary>This should only be used by the Client!</summary>
-        /// <param name="ip">Server IP</param>
-        /// <param name="port">Server Port</param>
-        public void Connect()
+        internal void Connect()
         {
             Socket = new TcpClient
                      {
@@ -45,7 +38,7 @@ namespace Swerver.Util
 
         /// <summary></summary>
         /// <param name="packet"></param>
-        public void SendData(Packet packet)
+        internal void SendData(Packet packet)
         {
             try
             {
@@ -54,7 +47,7 @@ namespace Swerver.Util
             }
             catch (Exception e)
             {
-                Console.WriteLine($"Error sending data to Player {Id} via TCP: {e}");
+                Console.WriteLine($"Error sending data to Player {Client.Client.Instance.Id} via TCP: {e}");
             }
         }
 
@@ -92,7 +85,7 @@ namespace Swerver.Util
             while (packetLength > 0 && packetLength <= _receivedData.UnreadLength())
             {
                 var packetBytes = _receivedData.ReadBytes(packetLength);
-                ExecuteOnMainThread(packetBytes, Id);
+                ExecuteOnMainThread(packetBytes);
                 packetLength = 0;
 
                 if (_receivedData.UnreadLength() < 4) continue;
@@ -105,7 +98,7 @@ namespace Swerver.Util
 
         protected abstract void ExecuteOnMainThread(Action action);
 
-        private void ExecuteOnMainThread(byte[] packetBytes, int id)
+        private void ExecuteOnMainThread(byte[] packetBytes)
         {
             ExecuteOnMainThread(() =>
                                 {
@@ -114,7 +107,5 @@ namespace Swerver.Util
                                     Client.Client.PacketHandlers[packetId](packet);
                                 });
         }
-
-        private delegate void PacketHandler(Packet packet);
     }
 }

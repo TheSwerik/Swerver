@@ -16,7 +16,7 @@ A Networking Library primarily for games but can also be used for other stuff.
 * For Client receiving, add a Method to the Servers `PacketHandlers`. Method Examples are `Swerver.Client.ClientHandler`'s `WelcomeReceived` and `UdpTestReceived`.
 ### Examples
 #### ExecuteOnMainThread
-For Console App, use the `Client.ThreadManager` class:
+For a Console App, use the `Client.ThreadManager` class:
 ```c#
 protected override void ExecuteOnMainThread(Action action)
 {

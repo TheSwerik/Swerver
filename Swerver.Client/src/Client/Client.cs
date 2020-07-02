@@ -13,8 +13,8 @@ namespace Swerver.Client
 
         public static Dictionary<int, PacketHandler> PacketHandlers;
         public int Id;
-        public Tcp Tcp;
-        public Udp Udp;
+        internal Tcp Tcp;
+        internal Udp Udp;
 
         public static void Init(Tcp tcp, Udp udp)
         {
