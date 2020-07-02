@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using Swerver.Client;
 
 namespace SwerverTestClient
 {
@@ -7,6 +8,10 @@ namespace SwerverTestClient
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow() { InitializeComponent(); }
+        public MainWindow()
+        {
+            InitializeComponent();
+            Client.Init(new TcpImpl(), new UdpImpl());
+        }
     }
 }
