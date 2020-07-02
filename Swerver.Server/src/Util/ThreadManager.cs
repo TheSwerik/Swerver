@@ -5,6 +5,7 @@ namespace Swerver.Util
 {
     public static class ThreadManager
     {
+        // ReSharper disable once InconsistentNaming
         private static readonly List<Action> executeOnMainThread = new List<Action>();
         private static readonly List<Action> ExecuteCopiedOnMainThread = new List<Action>();
         private static bool _actionToExecuteOnMainThread;

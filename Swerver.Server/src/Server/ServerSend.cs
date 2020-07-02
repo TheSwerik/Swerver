@@ -1,6 +1,8 @@
 ﻿using System.Linq;
 using Swerver.Util;
 
+// ReSharper disable UnusedMember.Local
+
 namespace Swerver.Server
 {
     public static class ServerSend

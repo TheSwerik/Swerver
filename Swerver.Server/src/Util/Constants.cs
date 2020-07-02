@@ -1,4 +1,7 @@
-﻿namespace Swerver.Util
+﻿// ReSharper disable FieldCanBeMadeReadOnly.Global
+// ReSharper disable ConvertToConstant.Global
+
+namespace Swerver.Util
 {
     /// <summary>This houses all needed Constants.</summary>
     public static class Constants

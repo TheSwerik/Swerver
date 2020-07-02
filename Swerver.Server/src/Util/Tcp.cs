@@ -110,7 +110,7 @@ namespace Swerver.Util
             while (packetLength > 0 && packetLength <= _receivedData.UnreadLength())
             {
                 var packetBytes = _receivedData.ReadBytes(packetLength);
-                ExecuteOnMainThread(packetBytes, Id);
+                ExecuteOnMainThread(packetBytes);
                 packetLength = 0;
 
                 if (_receivedData.UnreadLength() < 4) continue;
@@ -121,7 +121,7 @@ namespace Swerver.Util
             return packetLength <= 1;
         }
 
-        private void ExecuteOnMainThread(byte[] packetBytes, int id)
+        private void ExecuteOnMainThread(byte[] packetBytes)
         {
             ThreadManager.ExecuteOnMainThread(() =>
                                               {
