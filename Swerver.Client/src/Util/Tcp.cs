@@ -130,7 +130,7 @@ namespace ServerLibrary.Util
                                 {
                                     using var packet = new Packet(packetBytes);
                                     var packetId = packet.ReadInt();
-                                    Client.Client.PacketHandlers[packetId](packet);
+                                    Swerver.Client.Client.Client.PacketHandlers[packetId](packet);
                                 });
         }
 

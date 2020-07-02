@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using ServerLibrary.Client;
 using ServerLibrary.Util;
 
-namespace ServerLibrary.Client
+namespace Swerver.Client
 {
     public class Client
     {

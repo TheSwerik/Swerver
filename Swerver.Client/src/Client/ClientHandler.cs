@@ -12,10 +12,11 @@ namespace ServerLibrary.Client
             var id = packet.ReadInt();
 
             Console.WriteLine($"Message Received: {msg}");
-            Client.Instance.Id = id;
+            Swerver.Client.Client.Client.Instance.Id = id;
             ClientSend.WelcomeReceived();
 
-            Client.Instance.Udp.Connect(((IPEndPoint) Client.Instance.Tcp.Socket.Client.LocalEndPoint).Port);
+            Swerver.Client.Client.Client.Instance.Udp.Connect(
+                ((IPEndPoint) Swerver.Client.Client.Client.Instance.Tcp.Socket.Client.LocalEndPoint).Port);
         }
 
         public static void UdpTest(Packet packet)

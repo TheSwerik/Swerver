@@ -1,79 +1,78 @@
 ﻿using System;
 using System.Net;
-using System.Net.Mime;
 using System.Net.Sockets;
 using ServerLibrary.Util;
 
 namespace ServerLibrary.Client
 {
-   
-        public abstract class Udp
+    public abstract class Udp
+    {
+        private IPEndPoint _endPoint;
+        private UdpClient _socket;
+
+        protected Udp(string ip, int port) { _endPoint = new IPEndPoint(IPAddress.Parse(ip), port); }
+
+        internal void Connect(int localPort)
         {
-            private IPEndPoint _endPoint;
-            private UdpClient _socket;
+            _socket = new UdpClient(localPort);
 
-            protected Udp(string ip, int port) { _endPoint = new IPEndPoint(IPAddress.Parse(ip), port); }
+            _socket.Connect(_endPoint);
 
-            internal void Connect(int localPort)
+            _socket.BeginReceive(ReceiveCallback, null);
+
+            using var packet = new Packet();
+            SendData(packet);
+        }
+
+        private void ReceiveCallback(IAsyncResult result)
+        {
+            try
             {
-                _socket = new UdpClient(localPort);
-
-                _socket.Connect(_endPoint);
-
+                var data = _socket.EndReceive(result, ref _endPoint);
                 _socket.BeginReceive(ReceiveCallback, null);
 
-                using var packet = new Packet();
-                SendData(packet);
-            }
-
-            private void ReceiveCallback(IAsyncResult result)
-            {
-                try
-                {
-                    var data = _socket.EndReceive(result, ref _endPoint);
-                    _socket.BeginReceive(ReceiveCallback, null);
-
-                    if (data.Length < 4)
-                        //TODO Disconnect
-                        return;
-
-                    HandleData(data);
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine($"Error receiving Server Data: {e}");
+                if (data.Length < 4)
                     //TODO Disconnect
-                }
-            }
+                    return;
 
-            internal void SendData(Packet packet)
+                HandleData(data);
+            }
+            catch (Exception e)
             {
-                try
-                {
-                    packet.InsertInt(Client.Instance.Id);
-                    _socket?.BeginSend(packet.ToArray(), packet.Length(), null, null);
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine($"Error sending data to Player {Client.Instance.Id} via Udp: {e}");
-                }
+                Console.WriteLine($"Error receiving Server Data: {e}");
+                //TODO Disconnect
             }
-
-            private void HandleData(byte[] data)
-            {
-                using var pckt = new Packet(data);
-
-                var packetLength = pckt.ReadInt();
-                data = pckt.ReadBytes(packetLength);
-
-                ExecuteOnMainThread(() =>
-                                    {
-                                        using var packet = new Packet(data);
-                                        var packetId = packet.ReadInt();
-                                        Client.PacketHandlers[packetId](packet);
-                                    });
-            }
-
-            protected abstract void ExecuteOnMainThread(Action action);
         }
+
+        internal void SendData(Packet packet)
+        {
+            try
+            {
+                packet.InsertInt(Swerver.Client.Client.Client.Instance.Id);
+                _socket?.BeginSend(packet.ToArray(), packet.Length(), null, null);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(
+                    $"Error sending data to Player {Swerver.Client.Client.Client.Instance.Id} via Udp: {e}");
+            }
+        }
+
+        private void HandleData(byte[] data)
+        {
+            using var pckt = new Packet(data);
+
+            var packetLength = pckt.ReadInt();
+            data = pckt.ReadBytes(packetLength);
+
+            ExecuteOnMainThread(() =>
+                                {
+                                    using var packet = new Packet(data);
+                                    var packetId = packet.ReadInt();
+                                    Swerver.Client.Client.Client.PacketHandlers[packetId](packet);
+                                });
+        }
+
+        protected abstract void ExecuteOnMainThread(Action action);
+    }
 }

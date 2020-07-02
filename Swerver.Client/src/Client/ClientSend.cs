@@ -9,7 +9,7 @@ namespace ServerLibrary.Client
         private static void SendTcpData(Packet packet)
         {
             packet.WriteLength();
-            Client.Instance.Tcp.SendData(packet);
+            Swerver.Client.Client.Client.Instance.Tcp.SendData(packet);
         }
 
         /// <summary>Send UDP Data to the Server.</summary>
@@ -17,13 +17,13 @@ namespace ServerLibrary.Client
         private static void SendUdpData(Packet packet)
         {
             packet.WriteLength();
-            Client.Instance.Udp.SendData(packet);
+            Swerver.Client.Client.Client.Instance.Udp.SendData(packet);
         }
 
         public static void WelcomeReceived()
         {
             using var packet = new Packet((int) ClientPackets.WelcomeReceived);
-            packet.Write(Client.Instance.Id);
+            packet.Write(Swerver.Client.Client.Client.Instance.Id);
             packet.Write(MainWindow.Username);
 
             SendTcpData(packet);
