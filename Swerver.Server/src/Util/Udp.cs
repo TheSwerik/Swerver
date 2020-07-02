@@ -1,7 +1,7 @@
 ﻿using System.Net;
-using ServerLibrary.Util;
+using Swerver.Server;
 
-namespace ServerLibrary.Server
+namespace Swerver.Util
 {
     internal class Udp
     {
@@ -16,7 +16,7 @@ namespace ServerLibrary.Server
             ServerSend.UdpTest(_id);
         }
 
-        internal void SendData(Packet packet) { Server.SendUdpData(EndPoint, packet); }
+        internal void SendData(Packet packet) { Server.Server.SendUdpData(EndPoint, packet); }
 
         internal void HandleData(Packet packetData)
         {
@@ -26,7 +26,7 @@ namespace ServerLibrary.Server
                                               {
                                                   using var packet = new Packet(packetBytes);
                                                   var packetId = packet.ReadInt();
-                                                  Server.PacketHandlers[packetId](_id, packet);
+                                                  Server.Server.PacketHandlers[packetId](_id, packet);
                                               });
         }
     }

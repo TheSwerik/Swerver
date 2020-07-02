@@ -1,17 +1,11 @@
 ﻿using System;
 using System.Threading;
-using ServerLibrary.Util;
+using Swerver.Util;
 
-namespace ServerLibrary.Server
+namespace Swerver.Server
 {
     public static class ServerStarter
     {
-        /// <summary>The Port the Server will run on.</summary>
-        public static int Port = 46551;
-
-        /// <summary>The Maximum number of Clients that can connect to the Server.</summary>
-        public static int MaxPlayers = 50;
-
         private static bool _isRunning;
         private static GameLogic _gameLogic;
 
@@ -26,7 +20,7 @@ namespace ServerLibrary.Server
 
             var mainThread = new Thread(MainThread);
             mainThread.Start();
-            Server.Start(MaxPlayers, Port);
+            Server.Start(Constants.MaxPlayers, Constants.Port);
         }
 
         private static void MainThread()
@@ -40,7 +34,7 @@ namespace ServerLibrary.Server
             {
                 _gameLogic.InternalUpdate((DateTime.Now - lastFrame).Milliseconds);
                 lastFrame = DateTime.Now;
-                
+
                 nextLoop = nextLoop.AddMilliseconds(Constants.MsPerTick);
 
                 if (nextLoop > DateTime.Now) Thread.Sleep(nextLoop - DateTime.Now);

@@ -1,7 +1,6 @@
-﻿using System.Net;
-using ServerLibrary.Util;
+﻿using Swerver.Util;
 
-namespace ServerLibrary.Server
+namespace Swerver.Server
 {
     public class Client
     {
@@ -30,6 +29,5 @@ namespace ServerLibrary.Server
                                                   });
             }
         }
-
     }
 }

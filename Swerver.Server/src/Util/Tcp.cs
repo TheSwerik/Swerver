@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net.Sockets;
 
-namespace ServerLibrary.Util
+namespace Swerver.Util
 {
     public abstract class Tcp
     {

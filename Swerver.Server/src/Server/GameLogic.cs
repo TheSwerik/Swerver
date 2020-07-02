@@ -1,4 +1,6 @@
-﻿namespace ServerLibrary.Server
+﻿using Swerver.Util;
+
+namespace Swerver.Server
 {
     public abstract class GameLogic
     {

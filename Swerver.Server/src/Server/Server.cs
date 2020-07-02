@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
-using ServerLibrary.Util;
+using Swerver.Util;
 
-namespace ServerLibrary.Server
+namespace Swerver.Server
 {
     public static class Server
     {
