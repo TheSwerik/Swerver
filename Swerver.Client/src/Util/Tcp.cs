@@ -130,7 +130,7 @@ namespace Swerver.Util
                                 {
                                     using var packet = new Packet(packetBytes);
                                     var packetId = packet.ReadInt();
-                                    Client.Client.Client.PacketHandlers[packetId](packet);
+                                    Client.Client.PacketHandlers[packetId](packet);
                                 });
         }
 

@@ -1,4 +1,6 @@
-﻿namespace SwerverTestClient
+﻿using System.Windows;
+
+namespace SwerverTestClient
 {
     /// <summary>
     ///     Interaction logic for App.xaml

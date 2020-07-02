@@ -46,13 +46,13 @@ namespace Swerver.Util
         {
             try
             {
-                packet.InsertInt(Client.Client.Client.Instance.Id);
+                packet.InsertInt(Client.Client.Instance.Id);
                 _socket?.BeginSend(packet.ToArray(), packet.Length(), null, null);
             }
             catch (Exception e)
             {
                 Console.WriteLine(
-                    $"Error sending data to Player {Client.Client.Client.Instance.Id} via Udp: {e}");
+                    $"Error sending data to Player {Client.Client.Instance.Id} via Udp: {e}");
             }
         }
 
@@ -67,7 +67,7 @@ namespace Swerver.Util
                                 {
                                     using var packet = new Packet(data);
                                     var packetId = packet.ReadInt();
-                                    Client.Client.Client.PacketHandlers[packetId](packet);
+                                    Client.Client.PacketHandlers[packetId](packet);
                                 });
         }
 
