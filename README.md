@@ -32,7 +32,13 @@ protected override void ExecuteOnMainThread(Action action)
 ```
 # Things you can change:
 ### Client
-* IP of the Server with `Constants.Ip`
-* Port of the Server with `Constants.Port`
+* IP of the Server:`Swerver.Client.Constants.Ip`
+* Port of the Server:`Swerver.Client.Constants.Port`
+### Server
+* Port of the Server:`Swerver.Server.Constants.Port`
+* Maximum number of Concurrent Players:`Swerver.Server.Constants.MaxPlayers`
+* How often the Server updates every second:`Swerver.Server.Constants.TicksPerSec`
+* IP of the Server with `Swerver.Server.Constants.Ip`
+
 # Credits
 I followed [this tutorial](https://www.youtube.com/playlist?list=PLXkn83W0QkfnqsK8I0RAz5AbUxfg3bOQ5) for most of the code.
