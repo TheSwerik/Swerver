@@ -7,7 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\ServerUtil\ServerUtil.csproj"/>
+        <ProjectReference Include="..\ServerUtil\ServerUtil.csproj"/>
     </ItemGroup>
 
 </Project>
