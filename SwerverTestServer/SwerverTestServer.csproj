@@ -6,6 +6,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Swerver.Server\Swerver.Server.csproj" />
       <ProjectReference Include="..\Swerver\Swerver.csproj" />
     </ItemGroup>
 

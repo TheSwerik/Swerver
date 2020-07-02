@@ -5,7 +5,7 @@ namespace SwerverTestServer
 {
     internal static class Program
     {
-        internal static void Main() { }
+        internal static void Main() { ServerStarter.Start(new EmptyLogic());}
 
         internal class EmptyLogic : GameLogic
         {
