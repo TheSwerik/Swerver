@@ -4,6 +4,11 @@
         <OutputType>Library</OutputType>
         <TargetFramework>netcoreapp3.1</TargetFramework>
         <RootNamespace>Swerver</RootNamespace>
+        <Title>Server Quickstart Package</Title>
+        <Authors>Swerik</Authors>
+        <Description>Server Quickstart Package, Server Half</Description>
+        <PackageProjectUrl>https://github.com/TheSwerik/Swerver</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/TheSwerik/Swerver</RepositoryUrl>
     </PropertyGroup>
 
 </Project>
