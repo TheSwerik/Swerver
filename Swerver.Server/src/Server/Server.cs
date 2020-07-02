@@ -14,28 +14,23 @@ namespace Swerver.Server
         private static UdpClient _udpListener;
 
         public static Dictionary<int, PacketHandler> PacketHandlers;
-        public static int MaxPlayers { get; private set; }
-        private static int Port { get; set; }
         public static Dictionary<int, Client> Clients { get; private set; }
 
-        internal static void Start(int maxPlayers, int port)
+        internal static void Start()
         {
             Console.WriteLine("Starting Server...");
-
-            MaxPlayers = maxPlayers;
-            Port = port;
 
             Clients = new Dictionary<int, Client>();
             InitializeServerData();
 
-            _tcpListener = new TcpListener(IPAddress.Any, port);
+            _tcpListener = new TcpListener(IPAddress.Any, Constants.Port);
             _tcpListener.Start();
             _tcpListener.BeginAcceptTcpClient(TcpCallback, null);
 
-            _udpListener = new UdpClient(Port);
+            _udpListener = new UdpClient(Constants.Port);
             _udpListener.BeginReceive(UdpReceiveCallback, null);
 
-            Console.WriteLine($"Server Started on {Port}.");
+            Console.WriteLine($"Server Started on {Constants.Port}.");
         }
 
         private static void TcpCallback(IAsyncResult result)
@@ -44,7 +39,7 @@ namespace Swerver.Server
             _tcpListener.BeginAcceptTcpClient(TcpCallback, null);
             Console.WriteLine($"Incoming connection for {client.Client.RemoteEndPoint}...");
 
-            for (var i = 1; i <= MaxPlayers; i++)
+            for (var i = 1; i <= Constants.MaxPlayers; i++)
             {
                 if (Clients[i].Tcp.Socket != null) continue;
                 Clients[i].Tcp.Connect(client, ServerSend.Welcome);
@@ -99,7 +94,7 @@ namespace Swerver.Server
 
         private static void InitializeServerData()
         {
-            for (var i = 1; i <= MaxPlayers; i++) Clients.Add(i, new Client(i));
+            for (var i = 1; i <= Constants.MaxPlayers; i++) Clients.Add(i, new Client(i));
 
             PacketHandlers = new Dictionary<int, PacketHandler>
                              {

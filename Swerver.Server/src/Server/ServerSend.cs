@@ -30,7 +30,7 @@ namespace Swerver.Server
         private static void SendTcpData(Packet packet)
         {
             packet.WriteLength();
-            for (var i = 1; i <= Server.MaxPlayers; i++) Server.Clients[i].Tcp.SendData(packet);
+            for (var i = 1; i <= Constants.MaxPlayers; i++) Server.Clients[i].Tcp.SendData(packet);
         }
 
         /// <summary> Send TCP Data to all Clients except one.</summary>
@@ -39,7 +39,7 @@ namespace Swerver.Server
         private static void SendTcpData(Packet packet, int except)
         {
             packet.WriteLength();
-            for (var i = 1; i <= Server.MaxPlayers; i++)
+            for (var i = 1; i <= Constants.MaxPlayers; i++)
             {
                 if (i == except) continue;
                 foreach (var client in Server.Clients
@@ -53,7 +53,7 @@ namespace Swerver.Server
         private static void SendUdpData(Packet packet)
         {
             packet.WriteLength();
-            for (var i = 1; i <= Server.MaxPlayers; i++) Server.Clients[i].Udp.SendData(packet);
+            for (var i = 1; i <= Constants.MaxPlayers; i++) Server.Clients[i].Udp.SendData(packet);
         }
 
         /// <summary>Send UDP Data to all Clients except one.</summary>

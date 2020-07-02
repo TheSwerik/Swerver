@@ -20,7 +20,7 @@ namespace Swerver.Server
 
             var mainThread = new Thread(MainThread);
             mainThread.Start();
-            Server.Start(Constants.MaxPlayers, Constants.Port);
+            Server.Start();
         }
 
         private static void MainThread()

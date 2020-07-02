@@ -3,7 +3,7 @@ using System.Net.Sockets;
 
 namespace Swerver.Util
 {
-    public abstract class Tcp
+    public class Tcp
     {
         private const int BufferSize = 4096;
         protected readonly int Id;
@@ -12,8 +12,7 @@ namespace Swerver.Util
         private NetworkStream _stream;
         public TcpClient Socket;
 
-        protected Tcp(int id) { Id = id; }
-        protected Tcp() { }
+        internal Tcp(int id) { Id = id; }
 
         /// <summary>This should only be used by the Client!</summary>
         /// <param name="ip">Server IP</param>
@@ -122,7 +121,15 @@ namespace Swerver.Util
             return packetLength <= 1;
         }
 
-        protected abstract void ExecuteOnMainThread(byte[] packetBytes, int id);
+        private void ExecuteOnMainThread(byte[] packetBytes, int id)
+        {
+            ThreadManager.ExecuteOnMainThread(() =>
+                                              {
+                                                  using var packet = new Packet(packetBytes);
+                                                  var packetId = packet.ReadInt();
+                                                  Server.Server.PacketHandlers[packetId](Id, packet);
+                                              });
+        }
 
         private delegate void PacketHandler(Packet packet);
     }
