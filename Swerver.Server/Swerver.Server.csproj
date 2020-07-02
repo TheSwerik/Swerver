@@ -3,7 +3,7 @@
     <PropertyGroup>
         <OutputType>Library</OutputType>
         <TargetFramework>netcoreapp3.1</TargetFramework>
-        <RootNamespace>ServerLibrary</RootNamespace>
+        <RootNamespace>Swerver</RootNamespace>
     </PropertyGroup>
 
 </Project>
