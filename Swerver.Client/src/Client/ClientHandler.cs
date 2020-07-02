@@ -4,22 +4,22 @@ using ServerLibrary.Util;
 
 namespace Swerver.Client
 {
-    public class ClientHandler
+    internal static class ClientHandler
     {
-        public static void Welcome(Packet packet)
+        internal static void Welcome(Packet packet)
         {
             var msg = packet.ReadString();
             var id = packet.ReadInt();
 
             Console.WriteLine($"Message Received: {msg}");
-            Client.Client.Instance.Id = id;
+            Client.Instance.Id = id;
             ClientSend.WelcomeReceived();
 
-            Client.Client.Instance.Udp.Connect(
-                ((IPEndPoint) Client.Client.Instance.Tcp.Socket.Client.LocalEndPoint).Port);
+            Client.Instance.Udp.Connect(
+                ((IPEndPoint) Client.Instance.Tcp.Socket.Client.LocalEndPoint).Port);
         }
 
-        public static void UdpTest(Packet packet)
+        internal static void UdpTest(Packet packet)
         {
             var msg = packet.ReadString();
 

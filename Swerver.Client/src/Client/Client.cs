@@ -17,14 +17,15 @@ namespace Swerver.Client
         public int Id;
         public string Ip = "127.0.0.1";
         public Tcp Tcp;
-        public Udp udp;
+        public Udp Udp;
+        public string Username;
 
         public static void Init(Tcp tcp, Udp udp)
         {
             if (Instance == null)
             {
-                Instance = new Client {Tcp = tcp, udp = udp};
-                Instance.udp.Init(Instance.Ip, Port);
+                Instance = new Client {Tcp = tcp, Udp = udp};
+                Instance.Udp.Init(Instance.Ip, Port);
             }
             else
             {
