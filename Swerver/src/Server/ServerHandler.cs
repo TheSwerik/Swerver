@@ -5,7 +5,7 @@ namespace ServerLibrary.Server
 {
     public static class ServerHandler
     {
-        internal static void WelcomeReceived(int client, Packet packet)
+        public static void WelcomeReceived(int client, Packet packet)
         {
             var id = packet.ReadInt();
             var username = packet.ReadString();
@@ -18,7 +18,7 @@ namespace ServerLibrary.Server
             // TODO: send player into game
         }
 
-        internal static void UdpTestReceived(int client, Packet packet)
+        public static void UdpTestReceived(int client, Packet packet)
         {
             var msg = packet.ReadString();
 

@@ -1,7 +1,13 @@
 ﻿namespace ServerLibrary.Server
 {
-    public class GameLogic
+    public abstract class GameLogic
     {
-        public void Update() { ThreadManager.UpdateMain(); }
+        protected abstract void Update(int delta);
+
+        internal void InternalUpdate(int delta)
+        {
+            ThreadManager.UpdateMain();
+            Update(delta);
+        }
     }
 }
