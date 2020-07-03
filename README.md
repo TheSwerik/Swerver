@@ -14,6 +14,7 @@ A Networking Library primarily for games but can also be used for other stuff.
 * Call `Client.Instance.ConnectToServer();` to connect to the Server.
 * For Client sending, write methods that look like `ClientSend` `Welcome` and `UdpTest`.
 * For Client receiving, add methods to the Servers `PacketHandlers`. Method Examples are `ClientHandler`'s `WelcomeReceived` and `UdpTestReceived`.
+* For proper Disconnecting, call `Client.Instance.Disconnect();`
 ### Examples
 #### ExecuteOnMainThread
 For a Console App, use the `Client.ThreadManager` class:
