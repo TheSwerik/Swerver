@@ -6,11 +6,11 @@
         <description>Server Quickstart Package, Client Half</description>
         <authors>Swerik</authors>
         <projectUrl>https://github.com/TheSwerik/Swerver</projectUrl>
-        <icon>images\icon.png</icon>
+        <icon>icon.png</icon>
         <tags>server client communication games</tags>
         <repository>https://github.com/TheSwerik/Swerver</repository>
     </metadata>
     <files>
-        <file src="..\icon.png" target="images\"/>
+        <file src="icon.png" target=""/>
     </files>
 </package>
