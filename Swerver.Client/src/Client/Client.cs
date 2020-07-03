@@ -10,9 +10,9 @@ namespace Swerver.Client
 
         public static Client Instance;
         public static Dictionary<int, PacketHandler> PacketHandlers;
-
-        private bool _isConnected;
         public int Id;
+
+        internal bool IsConnected;
         internal Tcp Tcp;
         internal Udp Udp;
 
@@ -34,7 +34,7 @@ namespace Swerver.Client
         public void ConnectToServer()
         {
             InitializeClientData();
-            _isConnected = true;
+            IsConnected = true;
             Tcp.Connect();
         }
 
@@ -50,8 +50,8 @@ namespace Swerver.Client
 
         public void Disconnect()
         {
-            if (!_isConnected) return;
-            _isConnected = false;
+            if (!IsConnected) return;
+            IsConnected = false;
             Tcp.Socket.Close();
             Udp.Socket.Close();
 

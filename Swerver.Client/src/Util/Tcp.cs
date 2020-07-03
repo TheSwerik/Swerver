@@ -62,6 +62,7 @@ namespace Swerver.Util
         {
             try
             {
+                if (!Client.Client.Instance.IsConnected) return;
                 var byteLength = _stream.EndRead(result);
                 if (byteLength <= 0)
                 {

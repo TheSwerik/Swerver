@@ -33,6 +33,7 @@ namespace Swerver.Util
         {
             try
             {
+                if (!Client.Client.Instance.IsConnected) return;
                 var data = Socket.EndReceive(result, ref _endPoint);
                 Socket.BeginReceive(ReceiveCallback, null);
 
