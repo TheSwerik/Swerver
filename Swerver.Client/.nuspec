@@ -8,6 +8,7 @@
         <projectUrl>https://github.com/TheSwerik/Swerver</projectUrl>
         <icon>images\Swerver.png</icon>
         <tags>server client communication games</tags>
+        <repository>https://github.com/TheSwerik/Swerver</repository>
     </metadata>
     <files>
         <file src="..\icon.png" target="images\"/>
