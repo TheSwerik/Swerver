@@ -33,25 +33,25 @@ for:
       file_version: '$(my_version_number)'
       informational_version: '$(my_version_number)'
 
-    after_test:
-      - ps: dotnet publish "-p:PublishProfile=$($env:project_name).Server\$($env:project_name).Server.csproj" -c:Release -o:Publish\Server -v:m
-      - ps: dotnet publish "-p:PublishProfile=$($env:project_name).Client\$($env:project_name).Client.csproj" -c:Release -o:Publish\Client -v:m
-      - ps: dotnet nuget push $($env:project_name).$($env:my_version_number).nupkg -k $($env:nuget_api) -s https://api.nuget.org/v3/index.json
+#    after_test:
+#      - ps: dotnet publish "-p:PublishProfile=$($env:project_name).Server\$($env:project_name).Server.csproj" -c:Release -o:Publish\Server -v:m
+#      - ps: dotnet publish "-p:PublishProfile=$($env:project_name).Client\$($env:project_name).Client.csproj" -c:Release -o:Publish\Client -v:m
+#      - ps: dotnet nuget push $($env:project_name).$($env:my_version_number).nupkg -k $($env:nuget_api) -s https://api.nuget.org/v3/index.json
 
-    artifacts:
-      - path: /Publish/Server/$(application_name).Server.npkg
-        name: ServerPackage
-      - path: /Publish/Server/$(application_name).Client.npkg
-        name: ClientPackage
+#    artifacts:
+#      - path: /Publish/Server/$(application_name).Server.npkg
+#        name: ServerPackage
+#      - path: /Publish/Server/$(application_name).Client.npkg
+#        name: ClientPackage
 
-    deploy:
-      - provider: GitHub
-        release: $(my_version_number)
-        auth_token: # encrypted token:
-          secure: HESVuhwKdUbPpbBsQrWslB7GYNy5r03/MN/enpu7UWbY886bOE+EpbEFwAVMrtLO #REPLACE WITH TOKEN
-        artifact: ServerPackage, ClientPackage
-        draft: false
-        prerelease: false
-        force_update: false
-        on:
-          branch: master
+#    deploy:
+#      - provider: GitHub
+#        release: $(my_version_number)
+#        auth_token: # encrypted token:
+#          secure: HESVuhwKdUbPpbBsQrWslB7GYNy5r03/MN/enpu7UWbY886bOE+EpbEFwAVMrtLO #REPLACE WITH TOKEN
+#        artifact: ServerPackage, ClientPackage
+#        draft: false
+#        prerelease: false
+#        force_update: false
+#        on:
+#          branch: master
