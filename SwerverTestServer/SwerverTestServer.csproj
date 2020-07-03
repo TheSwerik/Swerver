@@ -5,11 +5,11 @@
         <TargetFramework>netcoreapp3.1</TargetFramework>
     </PropertyGroup>
 
-    <ItemGroup>
-        <ProjectReference Include="..\Swerver.Server\Swerver.Server.csproj"/>
-    </ItemGroup>
     <!--    <ItemGroup>-->
-    <!--        <PackageReference Include="Swerver.Server" Version="1.1.0"/>-->
+    <!--        <ProjectReference Include="..\Swerver.Server\Swerver.Server.csproj"/>-->
     <!--    </ItemGroup>-->
+    <ItemGroup>
+        <PackageReference Include="Swerver.Server" Version="1.1.1"/>
+    </ItemGroup>
 
 </Project>
