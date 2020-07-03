@@ -12,7 +12,7 @@ namespace Swerver.Server
         /// <summary>Send TCP Data to a Client.</summary>
         /// <param name="client">ID of the Client</param>
         /// <param name="packet">Data to be sent</param>
-        private static void SendTcpData(int client, Packet packet)
+        public static void SendTcpData(int client, Packet packet)
         {
             packet.WriteLength();
             Server.Clients[client].Tcp.SendData(packet);
@@ -21,7 +21,7 @@ namespace Swerver.Server
         /// <summary>Send UDP Data to a Client.</summary>
         /// <param name="client">ID of the Client</param>
         /// <param name="packet">Data to be sent</param>
-        private static void SendUdpData(int client, Packet packet)
+        public static void SendUdpData(int client, Packet packet)
         {
             packet.WriteLength();
             Server.Clients[client].Udp.SendData(packet);
@@ -29,7 +29,7 @@ namespace Swerver.Server
 
         /// <summary>Send TCP Data to all Clients.</summary>
         /// <param name="packet">Data to be sent</param>
-        private static void SendTcpData(Packet packet)
+        public static void SendTcpData(Packet packet)
         {
             packet.WriteLength();
             for (var i = 1; i <= Constants.MaxPlayers; i++) Server.Clients[i].Tcp.SendData(packet);
@@ -38,7 +38,7 @@ namespace Swerver.Server
         /// <summary> Send TCP Data to all Clients except one.</summary>
         /// <param name="packet">Data to be sent</param>
         /// <param name="except">ID of the Client that does not receive the Data</param>
-        private static void SendTcpData(Packet packet, int except)
+        public static void SendTcpData(Packet packet, int except)
         {
             packet.WriteLength();
             for (var i = 1; i <= Constants.MaxPlayers; i++)
@@ -52,7 +52,7 @@ namespace Swerver.Server
 
         /// <summary>Send UDP Data to all Clients.</summary>
         /// <param name="packet">Data to be sent</param>
-        private static void SendUdpData(Packet packet)
+        public static void SendUdpData(Packet packet)
         {
             packet.WriteLength();
             for (var i = 1; i <= Constants.MaxPlayers; i++) Server.Clients[i].Udp.SendData(packet);
@@ -61,7 +61,7 @@ namespace Swerver.Server
         /// <summary>Send UDP Data to all Clients except one.</summary>
         /// <param name="packet">Data to be sent</param>
         /// <param name="except">ID of the Client that does not receive the Data</param>
-        private static void SendUdpData(Packet packet, int except)
+        public static void SendUdpData(Packet packet, int except)
         {
             packet.WriteLength();
             foreach (var client in Server.Clients

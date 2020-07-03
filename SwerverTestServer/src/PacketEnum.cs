@@ -1,4 +1,4 @@
-﻿namespace SwerverTestClient
+﻿namespace SwerverTestServer
 {
     public enum PacketEnum
     {

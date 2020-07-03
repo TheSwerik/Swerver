@@ -11,7 +11,6 @@ namespace SwerverTestClient
             var msg = packet.ReadString();
 
             Console.WriteLine($"Message Received: {msg}");
-            SendLol();
         }
 
         public static void SendLol()

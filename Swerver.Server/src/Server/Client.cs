@@ -6,7 +6,7 @@ namespace Swerver.Server
     public class Client
     {
         public readonly int Id;
-        internal readonly Tcp Tcp;
+        public readonly Tcp Tcp;
         internal readonly Udp Udp;
 
         internal Client(int id)

@@ -6,8 +6,20 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" Closing="Window_OnClosing">
     <Grid>
-        <Button Content="Disconnect" Click="Button_Disconnect_OnClick" />
-        <Button Content="Connect" Click="Button_Connect_OnClick" />
-        <Button Content="Send lol" Click="Button_lol_OnClick" />
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Button Grid.Column="1" Grid.Row="1" Content="Disconnect" Click="Button_Disconnect_OnClick" />
+        <Button Grid.Column="2" Grid.Row="1" Content="Connect" Click="Button_Connect_OnClick" />
+        <Button Grid.Column="3" Grid.Row="1" Content="Send lol" Click="Button_lol_OnClick" />
     </Grid>
 </Window>
