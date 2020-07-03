@@ -18,7 +18,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <None Include="$(SolutionDir)icon.png" Pack="true" PackagePath="" LinkBase="" CopyToOutputDirectory="Always"/>
-        <!--        <None Include="$(SolutionDir)icon.png" LinkBase="" CopyToOutputDirectory="Always"/>-->
+        <!--        <None Include="$(SolutionDir)icon.png" Pack="true" PackagePath="" LinkBase="" CopyToOutputDirectory="Always"/>-->
+        <None Include="$(SolutionDir)icon.png" LinkBase="" CopyToOutputDirectory="Always"/>
     </ItemGroup>
 </Project>
