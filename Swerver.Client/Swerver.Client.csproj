@@ -14,11 +14,11 @@
         <RepositoryUrl>https://github.com/TheSwerik/Swerver</RepositoryUrl>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageIcon>icon.png</PackageIcon>
-        <PackageIconFullPath>$(MSBuildThisFileDirectory)icon.png</PackageIconFullPath>
     </PropertyGroup>
 
     <ItemGroup>
         <!--        <None Include="$(SolutionDir)icon.png" Pack="true" PackagePath="" LinkBase="" CopyToOutputDirectory="Always"/>-->
-        <None Include="$(SolutionDir)icon.png" LinkBase="" CopyToOutputDirectory="Always"/>
+        <!--        <None Include="$(SolutionDir)icon.png" LinkBase="" CopyToOutputDirectory="Always"/>-->
+        <None Include="..\icon.png" Pack="true" Visible="false" PackagePath=""/>
     </ItemGroup>
 </Project>
