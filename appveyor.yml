@@ -41,14 +41,14 @@ for:
       only:
         - master
 
-      dotnet_csproj:
-        patch: true
-        file: '**\*.csproj'
-        version: '$(my_version_number)'
-        package_version: '$(my_version_number)'
-        assembly_version: '$(my_version_number)'
-        file_version: '$(my_version_number)'
-        informational_version: '$(my_version_number)'
+    dotnet_csproj:
+      patch: true
+      file: '**\*.csproj'
+      version: '$(my_version_number)'
+      package_version: '$(my_version_number)'
+      assembly_version: '$(my_version_number)'
+      file_version: '$(my_version_number)'
+      informational_version: '$(my_version_number)'
 
     deploy:
       - provider: NuGet
