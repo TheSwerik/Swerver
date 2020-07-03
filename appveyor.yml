@@ -32,28 +32,14 @@ for:
       informational_version: '$(my_version_number)'
 
     deploy:
-      provider: NuGet
-      api_key:
-        secure: dvBoUwBIXmJhZm9jD5jxnU5FjrHji0KMbTMxgui4jLBnUbFUkBoDN81yuhevoOFo
-      artifact: /.*(\.|\.s)nupkg/
-
-  - branches:
-      only:
-        - master
-
-    dotnet_csproj:
-      patch: true
-      file: '**\*.csproj'
-      version: '$(my_version_number)'
-      package_version: '$(my_version_number)'
-      assembly_version: '$(my_version_number)'
-      file_version: '$(my_version_number)'
-      informational_version: '$(my_version_number)'
-
-    deploy:
       - provider: NuGet
+        api_key:
+          secure: dvBoUwBIXmJhZm9jD5jxnU5FjrHji0KMbTMxgui4jLBnUbFUkBoDN81yuhevoOFo
+        artifact: /.*(\.|\.s)nupkg/
+
+      - provider: NuGet
+        api_key:
+          secure: t+q9dcBPFxzZdmdGxIahNaP0GHE90XdbEHHVMrmroJpFSCkM3d3tQ2QOtPYQTBpu
         server: https://nuget.pkg.github.com/TheSwerik/index.json
         artifact: /.*(\.|\.s)nupkg/
         username: TheSwerik
-        api_key:
-          secure: t+q9dcBPFxzZdmdGxIahNaP0GHE90XdbEHHVMrmroJpFSCkM3d3tQ2QOtPYQTBpu

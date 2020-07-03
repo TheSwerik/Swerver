@@ -6,7 +6,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Swerver.Server\Swerver.Server.csproj" />
+        <PackageReference Include="Swerver.Server" Version="1.0.0"/>
     </ItemGroup>
 
 </Project>
