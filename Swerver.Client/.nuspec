@@ -11,6 +11,6 @@
         <repository>https://github.com/TheSwerik/Swerver</repository>
     </metadata>
     <files>
-        <file src="..\icon.png" target=""/>
+        <file src="icon.png" target="./"/>
     </files>
 </package>
