@@ -5,5 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" Closing="Window_OnClosing">
-    <Grid />
+    <Grid>
+        <Button Content="Disconnect" Click="Button_Disconnect_OnClick" />
+        <Button Content="Connect" Click="Button_Connect_OnClick" />
+        <Button Content="Send lol" Click="Button_lol_OnClick" />
+    </Grid>
 </Window>
