@@ -14,6 +14,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Swerver.Client" Version="1.0.4"/>
+        <ProjectReference Include="..\Swerver.Client\Swerver.Client.csproj"/>
     </ItemGroup>
 </Project>

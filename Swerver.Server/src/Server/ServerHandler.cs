@@ -12,8 +12,6 @@ namespace Swerver.Server
             Console.WriteLine(
                 $"{Server.Clients[client].Tcp.Socket.Client.RemoteEndPoint} connected successfully and is now player {client}.");
             if (client != id) Console.WriteLine($"Player (ID: {client}) has assumed the wrong client ID ({id})!");
-
-            // TODO: send player into game
         }
 
         public static void UdpTestReceived(int client, Packet packet)

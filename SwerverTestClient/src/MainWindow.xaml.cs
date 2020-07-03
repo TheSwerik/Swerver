@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.ComponentModel;
+using System.Windows;
 using Swerver.Client;
 
 namespace SwerverTestClient
@@ -14,5 +15,7 @@ namespace SwerverTestClient
             Client.Init(new TcpImpl(), new UdpImpl());
             Client.Instance.ConnectToServer();
         }
+
+        private void Window_OnClosing(object sender, CancelEventArgs e) { Client.Instance.Disconnect(); }
     }
 }
