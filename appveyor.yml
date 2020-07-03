@@ -15,6 +15,7 @@ before_build:
   - ps: nuget restore -Verbosity quiet
 
 build:
+  publish_nuget: true
   verbosity: minimal
   project: $(project_name).sln
 
