@@ -18,6 +18,8 @@ namespace Swerver.Util
 
         internal void SendData(Packet packet) { Server.Server.SendUdpData(EndPoint, packet); }
 
+        internal void Disconnect() { EndPoint = null; }
+
         internal void HandleData(Packet packetData)
         {
             var packetLength = packetData.ReadInt();

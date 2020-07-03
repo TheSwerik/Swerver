@@ -1,4 +1,5 @@
-﻿using Swerver.Util;
+﻿using System;
+using Swerver.Util;
 
 namespace Swerver.Server
 {
@@ -13,6 +14,14 @@ namespace Swerver.Server
             Id = id;
             Tcp = new Tcp(Id);
             Udp = new Udp(Id);
+        }
+
+        public void Disconnect()
+        {
+            Console.WriteLine($"{Tcp.Socket.Client.RemoteEndPoint} has disconnected.");
+
+            Tcp.Disconnect();
+            Udp.Disconnect();
         }
     }
 }

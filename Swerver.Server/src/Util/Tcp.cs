@@ -14,26 +14,6 @@ namespace Swerver.Util
 
         internal Tcp(int id) { Id = id; }
 
-        /// <summary>This should only be used by the Client!</summary>
-        /// <param name="ip">Server IP</param>
-        /// <param name="port">Server Port</param>
-        public void Connect(string ip, int port)
-        {
-            Socket = new TcpClient
-                     {
-                         ReceiveBufferSize = BufferSize,
-                         SendBufferSize = BufferSize
-                     };
-
-            _receiveBuffer = new byte[BufferSize];
-            _receivedData = new Packet();
-
-            Socket.BeginConnect(ip, port, ConnectCallback, Socket);
-        }
-
-        /// <summary>This should only be used by the Server!</summary>
-        /// <param name="socket"></param>
-        /// <param name="sendWelcome">The Send Method</param>
         public void Connect(TcpClient socket, Action<int, string> sendWelcome)
         {
             Socket = socket;
@@ -76,12 +56,25 @@ namespace Swerver.Util
             }
         }
 
+        internal void Disconnect()
+        {
+            Socket.Close();
+            _stream = null;
+            _receivedData = null;
+            _receiveBuffer = null;
+            Socket = null;
+        }
+
         private void ReceiveCallback(IAsyncResult result)
         {
             try
             {
                 var byteLength = _stream.EndRead(result);
-                if (byteLength <= 0) return; //TODO Disconnect
+                if (byteLength <= 0)
+                {
+                    Server.Server.Clients[Id].Disconnect();
+                    return;
+                }
 
                 var data = new byte[byteLength];
                 Array.Copy(_receiveBuffer, data, byteLength);
@@ -91,7 +84,7 @@ namespace Swerver.Util
             catch (Exception e)
             {
                 Console.WriteLine($"Error receiving Server Data: {e}");
-                //TODO Disconnect
+                Server.Server.Clients[Id].Disconnect();
             }
         }
 
