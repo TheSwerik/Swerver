@@ -8,7 +8,7 @@
         <Authors>Swerik</Authors>
         <Company>Swerik</Company>
         <PackageId>Swerver.Client</PackageId>
-        <Version>1.0.0</Version>
+        <Version>1.0.4</Version>
         <Description>Server Quickstart Package, Client Half</Description>
         <PackageProjectUrl>https://github.com/TheSwerik/Swerver</PackageProjectUrl>
         <RepositoryUrl>https://github.com/TheSwerik/Swerver</RepositoryUrl>
@@ -17,8 +17,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <!--        <None Include="$(SolutionDir)icon.png" Pack="true" PackagePath="" LinkBase="" CopyToOutputDirectory="Always"/>-->
-        <!--        <None Include="$(SolutionDir)icon.png" LinkBase="" CopyToOutputDirectory="Always"/>-->
         <None Include="..\icon.png" Pack="true" Visible="false" PackagePath=""/>
     </ItemGroup>
 </Project>

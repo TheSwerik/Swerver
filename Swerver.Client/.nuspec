@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <id>Swerver.Client</id>
-        <version>1.0.0</version>
+        <version>1.0.4</version>
         <description>Server Quickstart Package, Client Half</description>
         <authors>Swerik</authors>
         <projectUrl>https://github.com/TheSwerik/Swerver</projectUrl>

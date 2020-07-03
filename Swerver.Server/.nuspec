@@ -2,15 +2,15 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <id>Swerver.Server</id>
-        <version>1.0.0</version>
+        <version>1.0.4</version>
         <description>Server Quickstart Package, Server Half</description>
         <authors>Swerik</authors>
         <projectUrl>https://github.com/TheSwerik/Swerver</projectUrl>
-        <icon>images\icon.png</icon>
+        <icon>icon.png</icon>
         <tags>server client communication games</tags>
         <repository>https://github.com/TheSwerik/Swerver</repository>
     </metadata>
     <files>
-        <file src="..\icon.png" target="images\"/>
+        <file src="icon.png" target="./"/>
     </files>
 </package>
