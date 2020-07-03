@@ -1,4 +1,4 @@
-# Swerver
+# Swerver  ![Build status](https://ci.appveyor.com/api/projects/status/1t0mfwjgoq8cwvy8?svg=true)
 A Networking Library primarily for games but can also be used for other stuff.
 
 # How to use
