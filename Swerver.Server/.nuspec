@@ -6,7 +6,7 @@
         <description>Server Quickstart Package, Server Half</description>
         <authors>Swerik</authors>
         <projectUrl>https://github.com/TheSwerik/Swerver</projectUrl>
-        <icon>images\Swerver.png</icon>
+        <icon>images\icon.png</icon>
         <tags>server client communication games</tags>
         <repository>https://github.com/TheSwerik/Swerver</repository>
     </metadata>
