@@ -13,10 +13,10 @@
         </ApplicationDefinition>
     </ItemGroup>
 
-    <!--    <ItemGroup>-->
-    <!--        <ProjectReference Include="..\Swerver.Client\Swerver.Client.csproj"/>-->
-    <!--    </ItemGroup>-->
     <ItemGroup>
         <PackageReference Include="Swerver.Client" Version="1.1.1"/>
     </ItemGroup>
+    <!--    <ItemGroup>-->
+    <!--        <ProjectReference Include="..\Swerver.Client\Swerver.Client.csproj"/>-->
+    <!--    </ItemGroup>-->
 </Project>
