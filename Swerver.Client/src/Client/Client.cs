@@ -10,9 +10,13 @@ namespace Swerver.Client
 
         public static Client Instance;
         public static Dictionary<int, PacketHandler> PacketHandlers;
+
+        private bool _isConnected;
         public int Id;
         internal Tcp Tcp;
         internal Udp Udp;
+
+        ~Client() { Disconnect(); }
 
         public static void Init(Tcp tcp, Udp udp)
         {
@@ -30,6 +34,7 @@ namespace Swerver.Client
         public void ConnectToServer()
         {
             InitializeClientData();
+            _isConnected = true;
             Tcp.Connect();
         }
 
@@ -41,6 +46,16 @@ namespace Swerver.Client
                                  {(int) ServerPackets.UdpTest, ClientHandler.UdpTest}
                              };
             Console.WriteLine("Initialized packets.");
+        }
+
+        public void Disconnect()
+        {
+            if (!_isConnected) return;
+            _isConnected = false;
+            Tcp.Socket.Close();
+            Udp.Socket.Close();
+
+            Console.WriteLine("Disconnected from the Server.");
         }
     }
 }

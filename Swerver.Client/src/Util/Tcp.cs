@@ -25,6 +25,15 @@ namespace Swerver.Util
             Socket.BeginConnect(Constants.Ip, Constants.Port, ConnectCallback, Socket);
         }
 
+        private void Disconnect()
+        {
+            Client.Client.Instance.Disconnect();
+            _stream = null;
+            _receivedData = null;
+            _receiveBuffer = null;
+            Socket = null;
+        }
+
         private void ConnectCallback(IAsyncResult result)
         {
             Socket.EndConnect(result);
@@ -36,8 +45,6 @@ namespace Swerver.Util
             _stream.BeginRead(_receiveBuffer, 0, BufferSize, ReceiveCallback, null);
         }
 
-        /// <summary></summary>
-        /// <param name="packet"></param>
         internal void SendData(Packet packet)
         {
             try
@@ -56,7 +63,11 @@ namespace Swerver.Util
             try
             {
                 var byteLength = _stream.EndRead(result);
-                if (byteLength <= 0) return; //TODO Disconnect
+                if (byteLength <= 0)
+                {
+                    Client.Client.Instance.Disconnect();
+                    return;
+                }
 
                 var data = new byte[byteLength];
                 Array.Copy(_receiveBuffer, data, byteLength);
@@ -66,7 +77,7 @@ namespace Swerver.Util
             catch (Exception e)
             {
                 Console.WriteLine($"Error receiving Server Data: {e}");
-                //TODO Disconnect
+                Disconnect();
             }
         }
 

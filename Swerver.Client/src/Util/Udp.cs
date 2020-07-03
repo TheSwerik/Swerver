@@ -7,38 +7,47 @@ namespace Swerver.Util
     public abstract class Udp
     {
         private IPEndPoint _endPoint;
-        private UdpClient _socket;
+        internal UdpClient Socket;
         internal void Init(string ip, int port) { _endPoint = new IPEndPoint(IPAddress.Parse(ip), port); }
 
         internal void Connect(int localPort)
         {
-            _socket = new UdpClient(localPort);
+            Socket = new UdpClient(localPort);
 
-            _socket.Connect(_endPoint);
+            Socket.Connect(_endPoint);
 
-            _socket.BeginReceive(ReceiveCallback, null);
+            Socket.BeginReceive(ReceiveCallback, null);
 
             using var packet = new Packet();
             SendData(packet);
+        }
+
+        private void Disconnect()
+        {
+            Client.Client.Instance.Disconnect();
+            _endPoint = null;
+            Socket = null;
         }
 
         private void ReceiveCallback(IAsyncResult result)
         {
             try
             {
-                var data = _socket.EndReceive(result, ref _endPoint);
-                _socket.BeginReceive(ReceiveCallback, null);
+                var data = Socket.EndReceive(result, ref _endPoint);
+                Socket.BeginReceive(ReceiveCallback, null);
 
                 if (data.Length < 4)
-                    //TODO Disconnect
+                {
+                    Client.Client.Instance.Disconnect();
                     return;
+                }
 
                 HandleData(data);
             }
             catch (Exception e)
             {
                 Console.WriteLine($"Error receiving Server Data: {e}");
-                //TODO Disconnect
+                Disconnect();
             }
         }
 
@@ -47,7 +56,7 @@ namespace Swerver.Util
             try
             {
                 packet.InsertInt(Client.Client.Instance.Id);
-                _socket?.BeginSend(packet.ToArray(), packet.Length(), null, null);
+                Socket?.BeginSend(packet.ToArray(), packet.Length(), null, null);
             }
             catch (Exception e)
             {
